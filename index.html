@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>body{margin:0}</style>
 <title>Случай — теория вероятностей</title>
-<meta name="description" content="Интерактивный учебник по теории вероятностей и математической статистике по Гмурману: 11 глав, опыты, задачи с проверкой.">
+<meta name="description" content="Интерактивный учебник по теории вероятностей и математической статистике по Гмурману: 19 глав, опыты, задачи с проверкой, шпаргалка и план подготовки.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 /* cyrillic */
@@ -118,175 +118,219 @@
 }
 </style>
 <style>
-/* Layout: открытая книга на школьной парте. Слева — печатная страница учебника, справа — тетрадь в клетку с опытом. Снизу — панель листания. */
+/* Layout: раскрытый учебник в тканевом переплёте на столе под лампой. Слева — печатная страница с теорией,
+   справа — тетрадь в клетку с опытом. Глава открывается заставкой с крупным номером; снизу — панель листания. */
 :root{
-  --desk:#b3bec6; --desk-2:#a3afb8;
-  --paper:#fbfaf6; --paper-2:#f1efe8; --edge:#dcd8cc;
-  --ink:#22252b; --ink-soft:#5b616b; --rule:#d3dbe5;
-  --pen:#1f4fa8; --pen-wash:rgba(31,79,168,.11);
-  --stamp:#6a3d9a; --stamp-wash:rgba(106,61,154,.10);
-  --good:#2b7443; --bad:#b0302a; --glow:#d99a00;
-  --bar:rgba(251,250,246,.92); --shadow:rgba(30,40,50,.28);
-  --cloth:#2d5a49;
+  --desk:#a9b6bf; --desk-2:#8e9ca6; --lamp:rgba(255,248,228,.75);
+  --paper:#fcfbf7; --paper-2:#f2f0e9; --edge:#dcd8cc;
+  --ink:#1f232a; --ink-soft:#5a616c; --rule:#d6dde6;
+  --pen:#1f4fa8; --pen-wash:rgba(31,79,168,.10);
+  --stamp:#6a3d9a; --stamp-wash:rgba(106,61,154,.09);
+  --good:#2b7443; --bad:#b0302a; --glow:#d99a00; --foil:#b8892b;
+  --bar:rgba(252,251,247,.92); --shadow:rgba(28,36,46,.30);
+  --cloth:#2d5a49; --cloth-2:#24493b;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .055 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   --f-display:"Alegreya", "Georgia", serif;
   --f-body:"Literata", "PT Serif", "Georgia", serif;
   --f-hand:"Caveat", "Segoe Print", cursive;
   --f-mono:"JetBrains Mono", "Consolas", monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --desk:#101418; --desk-2:#161b21;
-  --paper:#1d2228; --paper-2:#232931; --edge:#2c333c;
-  --ink:#e3e6ea; --ink-soft:#9ba4af; --rule:#2b333d;
-  --pen:#8fb0ff; --pen-wash:rgba(143,176,255,.13);
-  --stamp:#bb94ff; --stamp-wash:rgba(187,148,255,.12);
-  --good:#6fca8c; --bad:#ff7d70; --glow:#ffc94a;
-  --bar:rgba(29,34,40,.94); --shadow:rgba(0,0,0,.55);
+  --desk:#0e1216; --desk-2:#070a0d; --lamp:rgba(255,196,110,.10);
+  --paper:#1c2127; --paper-2:#232931; --edge:#2e353e;
+  --ink:#e4e7eb; --ink-soft:#9da6b1; --rule:#29313b;
+  --pen:#8fb0ff; --pen-wash:rgba(143,176,255,.12);
+  --stamp:#bb94ff; --stamp-wash:rgba(187,148,255,.11);
+  --good:#6fca8c; --bad:#ff7d70; --glow:#ffc94a; --foil:#e2b964;
+  --bar:rgba(28,33,39,.94); --shadow:rgba(0,0,0,.6);
   color-scheme:dark;
 }}
 :root[data-theme="dark"]{
-  --desk:#101418; --desk-2:#161b21;
-  --paper:#1d2228; --paper-2:#232931; --edge:#2c333c;
-  --ink:#e3e6ea; --ink-soft:#9ba4af; --rule:#2b333d;
-  --pen:#8fb0ff; --pen-wash:rgba(143,176,255,.13);
-  --stamp:#bb94ff; --stamp-wash:rgba(187,148,255,.12);
-  --good:#6fca8c; --bad:#ff7d70; --glow:#ffc94a;
-  --bar:rgba(29,34,40,.94); --shadow:rgba(0,0,0,.55);
+  --desk:#0e1216; --desk-2:#070a0d; --lamp:rgba(255,196,110,.10);
+  --paper:#1c2127; --paper-2:#232931; --edge:#2e353e;
+  --ink:#e4e7eb; --ink-soft:#9da6b1; --rule:#29313b;
+  --pen:#8fb0ff; --pen-wash:rgba(143,176,255,.12);
+  --stamp:#bb94ff; --stamp-wash:rgba(187,148,255,.11);
+  --good:#6fca8c; --bad:#ff7d70; --glow:#ffc94a; --foil:#e2b964;
+  --bar:rgba(28,33,39,.94); --shadow:rgba(0,0,0,.6);
   color-scheme:dark;
 }
-[data-book="tv"]{--cloth:#2d5a49}
-[data-book="vms"]{--cloth:#2a4472}
+[data-book="tv"]{--cloth:#2d5a49;--cloth-2:#22463a}
+[data-book="vms"]{--cloth:#2a4472;--cloth-2:#1f3558}
 
 *{box-sizing:border-box}
 html,body{min-height:100%}
 body{
-  background:radial-gradient(120% 80% at 50% 0%, var(--desk) 0%, var(--desk-2) 100%) fixed, var(--desk);
-  color:var(--ink); font:16px/1.6 var(--f-body);
+  background:
+    radial-gradient(70% 55% at 50% 8%, var(--lamp) 0%, transparent 70%) fixed,
+    radial-gradient(130% 90% at 50% 0%, var(--desk) 0%, var(--desk-2) 100%) fixed,
+    var(--desk);
+  color:var(--ink); font:16px/1.62 var(--f-body);
   padding-left:max(16px, env(safe-area-inset-left, 0px));
   padding-right:max(16px, env(safe-area-inset-right, 0px));
-  padding-block:0 96px;
+  padding-block:0 110px;
 }
+body::after{content:"";position:fixed;inset:0;pointer-events:none;background:var(--grain);opacity:.8;z-index:0}
 button,input,select{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--pen);outline-offset:2px}
 a{color:var(--pen)}
+::selection{background:color-mix(in srgb,var(--glow) 40%,transparent)}
 
-/* ——— верх: корешки книг ——— */
-.top{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;padding-top:18px}
-.brand{font:800 26px/1 var(--f-display);letter-spacing:.01em;color:var(--ink)}
+/* ——— шапка ——— */
+.top{position:relative;z-index:1;max-width:1260px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 20px;padding-top:20px}
+.brand{font:800 28px/1 var(--f-display);letter-spacing:.005em;color:var(--ink)}
 .brand i{font-weight:500;color:var(--ink-soft)}
-.spines{display:flex;gap:8px;flex-wrap:wrap}
+.spines{display:flex;gap:6px;flex-wrap:wrap}
 .spine{
-  border:0;cursor:pointer;padding:8px 14px 8px 12px;border-radius:4px 4px 0 0;
-  background:var(--cloth);color:#f4f1e8;font:600 15px/1.2 var(--f-display);letter-spacing:.04em;
-  display:flex;gap:10px;align-items:center;opacity:.6;transform:translateY(4px);transition:.2s;
-  box-shadow:inset -3px 0 0 rgba(0,0,0,.18), inset 3px 0 0 rgba(255,255,255,.08);
+  border:0;cursor:pointer;padding:9px 16px 9px 14px;border-radius:5px 5px 0 0;
+  background:linear-gradient(90deg,var(--cloth-2),var(--cloth) 30%,var(--cloth) 70%,var(--cloth-2));
+  color:#f6f1e3;font:700 15px/1.2 var(--f-display);letter-spacing:.12em;
+  display:flex;gap:10px;align-items:center;opacity:.55;transform:translateY(5px);transition:.25s;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12)
 }
+.spine:hover{opacity:.85;transform:translateY(2px)}
 .spine[aria-pressed="true"]{opacity:1;transform:none}
-.spine small{font:500 12px var(--f-mono);opacity:.85}
+.spine small{font:500 12px var(--f-mono);letter-spacing:0;opacity:.85}
+.rank{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft);margin-left:auto}
+.rank b{font:700 16px var(--f-display);color:var(--ink)}
+.rk-l{font:600 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
+.rk-bar{display:inline-block;width:130px;height:9px;border:1.5px solid var(--ink);border-radius:999px;overflow:hidden;background:var(--paper)}
+.rk-bar i{display:block;height:100%;background:repeating-linear-gradient(-45deg,var(--stamp) 0 4px,color-mix(in srgb,var(--stamp) 65%,var(--paper)) 4px 8px);transition:width .8s cubic-bezier(.2,.9,.3,1)}
+.rk-xp{font:500 12px var(--f-mono)}
 
 /* ——— книга ——— */
-.desk{max-width:1240px;margin:0 auto;overflow-x:clip}
+.desk{position:relative;z-index:1;max-width:1260px;margin:0 auto;overflow-x:clip;padding-bottom:70px}
 .book{
-  position:relative;background:var(--cloth);border-radius:6px;padding:10px;
-  box-shadow:0 30px 60px -20px var(--shadow), 0 8px 18px -8px var(--shadow);
+  position:relative;border-radius:8px;padding:12px;
+  background:
+    repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 2px,transparent 2px 4px),
+    repeating-linear-gradient(-45deg,rgba(0,0,0,.06) 0 2px,transparent 2px 4px),
+    linear-gradient(var(--cloth),var(--cloth-2));
+  box-shadow:0 40px 70px -28px var(--shadow), 0 10px 22px -10px var(--shadow), inset 0 0 0 1px rgba(255,255,255,.06);
 }
-.spread{position:relative;display:grid;grid-template-columns:1fr 1fr;perspective:2400px;min-height:640px}
-.page{
-  position:relative;min-width:0;background:var(--paper);padding:34px 40px 48px;
-}
-.page.left{border-radius:3px 0 0 3px;box-shadow:inset -26px 0 30px -26px var(--shadow)}
-.page.right{
-  border-radius:0 3px 3px 0;box-shadow:inset 26px 0 30px -26px var(--shadow);
-  background-color:var(--paper);
-  background-image:linear-gradient(var(--rule) 1px, transparent 1px),linear-gradient(90deg, var(--rule) 1px, transparent 1px);
-  background-size:20px 20px;background-position:-1px -1px;
-}
-.folio{position:absolute;bottom:16px;font:500 13px var(--f-mono);color:var(--ink-soft)}
-.left .folio{left:40px}.right .folio{right:40px}
-.leaf{
-  position:absolute;top:0;bottom:0;width:50%;pointer-events:none;display:none;
-  background:linear-gradient(90deg,var(--paper-2),var(--paper));
-  backface-visibility:visible;z-index:5;border-radius:0 3px 3px 0;
-}
+.ribbon{position:absolute;left:calc(50% - 9px);bottom:-58px;width:18px;height:80px;z-index:6;pointer-events:none;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--stamp) 80%,#000),var(--stamp) 45%,color-mix(in srgb,var(--stamp) 85%,#000));
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 84%,0 100%);box-shadow:0 6px 10px var(--shadow)}
+.spread{position:relative;display:grid;grid-template-columns:1fr 1fr;perspective:2400px;min-height:680px}
+.spread::after{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 28px);width:56px;pointer-events:none;z-index:2;
+  background:linear-gradient(90deg,transparent,rgba(0,0,0,.10) 42%,rgba(0,0,0,.18) 50%,rgba(0,0,0,.10) 58%,transparent)}
+.page{position:relative;min-width:0;padding:38px 44px 56px;background-color:var(--paper)}
+.page.left{border-radius:4px 0 0 4px;background-image:var(--grain);
+  box-shadow:-1px 1px 0 var(--edge),-2px 2px 0 var(--paper-2),-3px 3px 0 var(--edge),-4px 4px 0 var(--paper-2),-5px 5px 0 var(--edge)}
+.page.right{border-radius:0 4px 4px 0;
+  background-image:var(--grain),linear-gradient(var(--rule) 1px, transparent 1px),linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size:auto,20px 20px,20px 20px;background-position:0 0,-1px -1px,-1px -1px;
+  box-shadow:1px 1px 0 var(--edge),2px 2px 0 var(--paper-2),3px 3px 0 var(--edge),4px 4px 0 var(--paper-2),5px 5px 0 var(--edge)}
+.page.right::before{content:"";position:absolute;top:0;bottom:0;left:52px;width:1.5px;background:color-mix(in srgb,var(--bad) 35%,transparent)}
+.folio{position:absolute;bottom:18px;font:500 13px var(--f-mono);color:var(--ink-soft)}
+.left .folio{left:44px}.right .folio{right:44px}
+.leaf{position:absolute;top:0;bottom:0;width:50%;pointer-events:none;display:none;background:linear-gradient(90deg,var(--paper-2),var(--paper));backface-visibility:visible;z-index:5;border-radius:0 4px 4px 0}
 .leaf.fwd{display:block;left:50%;transform-origin:left center;animation:turnF .62s cubic-bezier(.4,.1,.3,1) forwards}
-.leaf.back{display:block;left:0;transform-origin:right center;border-radius:3px 0 0 3px;animation:turnB .62s cubic-bezier(.4,.1,.3,1) forwards}
-@keyframes turnF{0%{transform:rotateY(0);box-shadow:0 0 0 var(--shadow)}50%{box-shadow:-30px 0 40px -10px var(--shadow)}100%{transform:rotateY(-180deg);box-shadow:0 0 0 var(--shadow)}}
+.leaf.back{display:block;left:0;transform-origin:right center;border-radius:4px 0 0 4px;animation:turnB .62s cubic-bezier(.4,.1,.3,1) forwards}
+@keyframes turnF{0%{transform:rotateY(0)}50%{box-shadow:-30px 0 40px -10px var(--shadow)}100%{transform:rotateY(-180deg)}}
 @keyframes turnB{0%{transform:rotateY(0)}50%{box-shadow:30px 0 40px -10px var(--shadow)}100%{transform:rotateY(180deg)}}
+.page > *{position:relative;z-index:1}
+.reveal{animation:rise .5s cubic-bezier(.2,.8,.3,1) both}
+@keyframes rise{from{transform:translateY(8px);opacity:.001}}
 
 /* ——— типографика страниц ——— */
-.runhead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:500 12px/1.4 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--edge);padding-bottom:8px;margin-bottom:18px}
+.runhead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:500 11.5px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--edge);padding-bottom:9px;margin-bottom:20px}
 h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
-h2{font-weight:800;font-size:34px;line-height:1.08;margin-bottom:14px}
-h2 .no{color:var(--pen);font-style:italic;font-weight:700;margin-right:.25em}
-h3{font-weight:700;font-size:19px;margin:18px 0 6px}
-.theory p{margin:0 0 10px;max-width:62ch}
-.theory ul{margin:0 0 10px;padding-left:20px}
-.theory li{margin-bottom:3px}
+.opener{position:relative;margin-bottom:18px;padding-right:96px;min-height:96px}
+.bignum{position:absolute;right:-6px;top:-18px;font:800 132px/1 var(--f-display);color:transparent;-webkit-text-stroke:1.5px color-mix(in srgb,var(--pen) 55%,transparent);letter-spacing:-.04em;pointer-events:none;user-select:none}
+.part-lbl{font:600 12px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--stamp);margin-bottom:6px}
+h2{font-weight:800;font-size:36px;line-height:1.06}
+h3{font-weight:700;font-size:20px;margin:22px 0 8px;display:flex;align-items:baseline;gap:8px}
+.theory h3::before{content:"§";font:700 16px var(--f-display);color:var(--pen)}
+.theory > p:first-of-type::first-letter{float:left;font:800 3.4em/.82 var(--f-display);color:var(--pen);margin:.06em .1em 0 0}
+.theory p{margin:0 0 11px;max-width:64ch}
+.theory ul,.theory ol{margin:0 0 11px;padding-left:22px}
+.theory li{margin-bottom:4px}
+.theory li::marker{color:var(--pen)}
 .theory b{font-weight:600}
-.f{ /* формула в рамке */
-  margin:12px 0;padding:10px 14px;border:1.5px solid var(--ink);border-radius:2px;
-  font-family:var(--f-body);font-style:italic;font-size:18px;line-height:1.9;overflow-x:auto;background:var(--paper)
+.f{
+  position:relative;margin:16px 0 14px;padding:24px 16px 12px;border:1.5px solid var(--ink);border-left:5px solid var(--pen);border-radius:3px;
+  font-family:var(--f-body);font-style:italic;font-size:18px;line-height:1.95;overflow-x:auto;
+  background:linear-gradient(var(--pen-wash),var(--pen-wash)),var(--paper)
 }
-.f small{font-style:normal;font-size:13px;color:var(--ink-soft);display:block;line-height:1.4}
+.f::before{content:"формула";position:absolute;top:5px;left:16px;font:600 10.5px var(--f-mono);line-height:1.2;font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:var(--pen)}
+.f small{font-style:normal;font-size:13px;color:var(--ink-soft);display:block;line-height:1.45;margin-top:4px}
 .fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;line-height:1.15}
 .fr>span:first-child{border-bottom:1.2px solid currentColor;padding:0 .2em}
 .fr>span{padding:0 .2em}
 code,.mono{font-family:var(--f-mono);font-size:.88em}
-pre.asm{font:13px/1.55 var(--f-mono);background:var(--paper-2);border-left:3px solid var(--pen);padding:10px 12px;overflow-x:auto;margin:10px 0;white-space:pre}
-.tbl{overflow-x:auto;margin:8px 0}
-.tbl table{border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
-.tbl th,.tbl td{border:1px solid var(--edge);padding:4px 8px;text-align:left}
+pre.asm{font:13px/1.55 var(--f-mono);background:var(--paper-2);border-left:3px solid var(--pen);padding:10px 12px;overflow-x:auto;margin:10px 0;white-space:pre;border-radius:0 3px 3px 0}
+.tbl{overflow-x:auto;margin:10px 0}
+.tbl table{border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums;background:var(--paper)}
+.tbl th,.tbl td{border:1px solid var(--edge);padding:5px 9px;text-align:left;vertical-align:top}
 .tbl th{font-weight:600;background:var(--paper-2)}
+.tbl tr:nth-child(even) td{background:color-mix(in srgb,var(--paper-2) 45%,transparent)}
 
-.lbl{font:700 22px/1 var(--f-hand);color:var(--pen);margin-bottom:6px}
-.predict{margin-top:20px;padding:14px 16px;border:1.5px dashed var(--ink-soft);border-radius:3px}
-.predict p{margin:0 0 8px}
+.lbl{font:700 23px/1 var(--f-hand);color:var(--pen);margin-bottom:8px}
+.predict{margin-top:24px;padding:16px 18px;border:1.5px dashed var(--ink-soft);border-radius:4px;background:var(--paper)}
+.predict p{margin:0 0 10px}
 .opts{display:flex;flex-direction:column;gap:6px}
-.opt{display:flex;gap:10px;align-items:flex-start;cursor:pointer;padding:4px 6px;border-radius:3px}
+.opt{display:flex;gap:10px;align-items:flex-start;cursor:pointer;padding:6px 8px;border-radius:4px;border:1px solid transparent;transition:background .15s}
 .opt:hover{background:var(--pen-wash)}
 .opt input{margin-top:6px;accent-color:var(--pen)}
-.opt.ok{background:color-mix(in srgb,var(--good) 14%,transparent)}
-.opt.no{background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.opt.ok{background:color-mix(in srgb,var(--good) 14%,transparent);border-color:color-mix(in srgb,var(--good) 40%,transparent)}
+.opt.no{background:color-mix(in srgb,var(--bad) 11%,transparent);border-color:color-mix(in srgb,var(--bad) 35%,transparent)}
 
-.flapbtn{
-  margin-top:16px;width:100%;cursor:pointer;text-align:left;border:1px solid var(--edge);
-  background:var(--paper-2);padding:14px 16px;border-radius:2px;position:relative;
-  box-shadow:0 6px 10px -6px var(--shadow);transition:transform .25s;
-}
+.flapbtn{margin-top:16px;width:100%;cursor:pointer;text-align:left;border:1px solid var(--edge);background:var(--paper-2);padding:15px 18px;border-radius:3px;position:relative;box-shadow:0 8px 12px -8px var(--shadow);transition:transform .25s}
+.flapbtn::after{content:"↥";position:absolute;right:16px;top:50%;transform:translateY(-50%);font:700 22px var(--f-display);color:var(--ink-soft)}
 .flapbtn:hover{transform:translateY(-2px) rotate(-.3deg)}
-.flapbtn b{font:700 22px/1 var(--f-hand);color:var(--ink)}
+.flapbtn b{font:700 23px/1 var(--f-hand);color:var(--ink)}
 .flapbtn span{display:block;font-size:13px;color:var(--ink-soft)}
 .flapbtn[aria-expanded="true"]{transform:perspective(600px) rotateX(8deg);transform-origin:top}
-.flapbody{padding:14px 16px;border:1px solid var(--edge);border-top:0;background:var(--paper)}
-.flapbody p{margin:0 0 8px}
+.flapbody{padding:16px 18px;border:1px solid var(--edge);border-top:0;background:var(--paper)}
+.flapbody p{margin:0 0 9px}
+
+/* итоги и вопросы к экзамену */
+.sum{margin-top:26px;padding:18px 20px 14px;border-radius:4px;background:linear-gradient(var(--stamp-wash),var(--stamp-wash)),var(--paper);border:1.5px solid color-mix(in srgb,var(--stamp) 50%,transparent)}
+.sum .lbl{color:var(--stamp)}
+.sum ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.sum li{display:grid;grid-template-columns:22px 1fr;gap:6px;align-items:baseline}
+.sum li::before{content:"✓";font:700 15px var(--f-mono);color:var(--stamp)}
+.examq{margin-top:20px}
+.examq details{border-top:1px solid var(--edge);padding:9px 0}
+.examq details:last-child{border-bottom:1px solid var(--edge)}
+.examq summary{cursor:pointer;font-weight:600;list-style:none;display:grid;grid-template-columns:26px 1fr;gap:4px}
+.examq summary::-webkit-details-marker{display:none}
+.examq summary::before{content:"?";display:grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--pen);font:700 12px var(--f-mono);color:var(--pen);margin-top:3px}
+.examq details[open] summary::before{content:"!";background:var(--pen);color:var(--paper)}
+.examq .ans{margin:8px 0 2px 30px;color:var(--ink);font-size:15px}
 
 /* ——— правая страница: опыт ——— */
-.fig{display:flex;flex-direction:column;gap:10px}
+.fig{display:flex;flex-direction:column;gap:12px;padding:14px;background:var(--paper);border:1px solid var(--edge);border-radius:4px;box-shadow:0 14px 24px -20px var(--shadow)}
 canvas.ink{width:100%;display:block;background:transparent;touch-action:manipulation}
-.cap{font:italic 14px/1.4 var(--f-body);color:var(--ink-soft);margin:6px 0 0}
-.cap b{font-style:normal;font-family:var(--f-mono);font-size:12px;letter-spacing:.04em}
-.try{font:600 21px/1.25 var(--f-hand);color:var(--pen);margin:10px 0 0}
-.ctls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px 18px}
-.ctl{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:14px}
+.cap{font:italic 14px/1.45 var(--f-body);color:var(--ink-soft);margin:10px 0 0}
+.cap b{font-style:normal;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--pen)}
+.try{font:600 22px/1.25 var(--f-hand);color:var(--pen);margin:12px 0 0}
+.ctls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px 20px}
+.ctl{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:14px}
 .ctl span{color:var(--ink-soft)}
-.ctl input[type=range]{width:100%;min-width:0;accent-color:var(--pen)}
-.ctl output{font:600 13px var(--f-mono);min-width:4ch;text-align:right}
+.ctl output{font:600 13px var(--f-mono);min-width:4ch;text-align:right;color:var(--pen)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;min-width:0;height:22px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:3px;background:linear-gradient(90deg,var(--ink),var(--ink));border-radius:2px}
+input[type=range]::-moz-range-track{height:3px;background:var(--ink);border-radius:2px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-7.5px;border-radius:50%;background:var(--paper);border:2.5px solid var(--pen);box-shadow:0 2px 5px var(--shadow);transition:transform .15s}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--paper);border:2.5px solid var(--pen)}
+input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.15)}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.btn{
-  cursor:pointer;border:1.5px solid var(--ink);background:var(--paper);padding:5px 12px;border-radius:2px;
-  font-size:14px;box-shadow:2px 2px 0 var(--ink);transition:transform .1s, box-shadow .1s
-}
+.btn{cursor:pointer;border:1.5px solid var(--ink);background:var(--paper);padding:6px 13px;border-radius:3px;font-size:14px;box-shadow:2px 2px 0 var(--ink);transition:transform .1s, box-shadow .1s, background .15s}
 .btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
 .btn:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
-.btn.pri{background:var(--pen);color:var(--paper);border-color:var(--pen);box-shadow:2px 2px 0 var(--ink)}
+.btn.pri{background:var(--pen);color:var(--paper);border-color:var(--pen);box-shadow:2px 2px 0 var(--ink);font-weight:600}
 .btn[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-select.sel,input.txt{border:1.5px solid var(--ink-soft);background:var(--paper);padding:5px 8px;border-radius:2px;font-size:14px;min-width:0;max-width:100%}
+select.sel,input.txt{border:1.5px solid var(--ink-soft);background:var(--paper);padding:6px 9px;border-radius:3px;font-size:14px;min-width:0;max-width:100%}
 input.txt{font-family:var(--f-mono)}
-.readout{font:14px/1.5 var(--f-mono);background:var(--paper);border:1px solid var(--edge);padding:8px 10px;overflow-x:auto;font-variant-numeric:tabular-nums}
+input.txt:focus,select.sel:focus{border-color:var(--pen);outline:none;box-shadow:0 0 0 3px var(--pen-wash)}
+.readout{font:14px/1.55 var(--f-mono);background:var(--paper-2);border:1px solid var(--edge);border-radius:3px;padding:9px 11px;overflow-x:auto;font-variant-numeric:tabular-nums}
 .readout b{color:var(--pen);font-weight:600}
 .readout .hot{color:var(--glow);font-weight:600}
 .readout .good{color:var(--good)}.readout .bad{color:var(--bad)}
 
-.challenge{margin-top:22px;padding:14px 16px;background:var(--paper);border:1.5px solid var(--stamp);border-radius:3px;position:relative}
+.challenge{margin-top:24px;padding:16px 18px;background:var(--paper);border:1.5px solid var(--stamp);border-radius:4px;position:relative;box-shadow:4px 4px 0 var(--stamp-wash)}
 .challenge .lbl{color:var(--stamp)}
 .challenge p{margin:0 0 10px}
 .challenge form{display:flex;gap:8px;flex-wrap:wrap}
@@ -294,85 +338,106 @@ input.txt{font-family:var(--f-mono)}
 .fb{margin:8px 0 0;font-size:14px;min-height:1.4em}
 .fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
 details.hint{margin-top:6px;font-size:14px;color:var(--ink-soft)}
-details.hint summary{cursor:pointer;font:600 18px var(--f-hand);color:var(--ink-soft)}
-.stampslot{position:absolute;right:-6px;top:-34px;width:104px;height:104px;pointer-events:none}
-.stamp{width:100%;height:100%;color:var(--stamp);transform:rotate(-14deg);opacity:.9}
+details.hint summary{cursor:pointer;font:600 19px var(--f-hand);color:var(--ink-soft)}
+.stampslot{position:absolute;right:-8px;top:-38px;width:108px;height:108px;pointer-events:none}
+.stamp{width:100%;height:100%;color:var(--stamp);transform:rotate(-14deg);opacity:.9;mix-blend-mode:multiply}
+:root[data-theme="dark"] .stamp{mix-blend-mode:normal}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .stamp{mix-blend-mode:normal}}
 .stamp.new{animation:thump .5s cubic-bezier(.2,1.6,.4,1)}
 @keyframes thump{0%{transform:rotate(-14deg) scale(2.2);opacity:0}100%{transform:rotate(-14deg) scale(1);opacity:.9}}
+.more{margin-top:20px;padding:16px 18px;background:var(--paper);border:1.5px solid var(--ink-soft);border-radius:4px;display:grid;gap:18px}
+.more .lbl{margin:0}
+.mq p{margin:0 0 8px}
+.mq form{display:flex;gap:8px;flex-wrap:wrap}
+.mq input{flex:1 1 140px}
+.mn{font:600 12.5px var(--f-mono);color:var(--paper);background:var(--pen);padding:1px 7px;border-radius:999px;white-space:nowrap;margin-right:4px}
+.mn.done{background:var(--good)}
+.mn.done::after{content:" ✓"}
 
 /* ——— обложка ——— */
-.cover h1{font-weight:800;font-size:clamp(48px,7vw,84px);line-height:.95;letter-spacing:-.01em}
-.cover .sub{font:italic 500 22px/1.3 var(--f-display);color:var(--ink-soft);margin:10px 0 20px}
-.steps{list-style:none;padding:0;margin:18px 0;display:grid;gap:8px;counter-reset:s}
-.steps li{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:baseline;counter-increment:s}
-.steps li::before{content:counter(s);font:700 26px/1 var(--f-hand);color:var(--pen);text-align:center}
-.toclist{list-style:none;padding:0;margin:0;display:grid;gap:2px}
-.toclist button{width:100%;display:grid;grid-template-columns:2.2em 1fr auto;gap:8px;align-items:baseline;text-align:left;cursor:pointer;background:none;border:0;padding:6px 4px;border-bottom:1px dotted var(--ink-soft)}
+.cover .eyebrow{font:600 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--foil)}
+.cover h1{font-weight:800;font-size:clamp(56px,8vw,104px);line-height:.92;letter-spacing:-.015em;margin:8px 0 0}
+.cover .sub{font:italic 500 23px/1.3 var(--f-display);color:var(--ink-soft);margin:10px 0 18px}
+.cover .rule{height:10px;margin:0 0 18px;background:radial-gradient(circle,var(--foil) 2px,transparent 2.5px) center/14px 10px repeat-x;opacity:.7}
+.medal{display:grid;grid-template-columns:76px 1fr;gap:16px;align-items:center;padding:14px 16px;margin:4px 0 18px;border:1.5px solid var(--ink);border-radius:6px;background:var(--paper-2)}
+.medal svg{width:76px;height:76px}
+.medal .mt{font:600 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.medal .mn2{font:800 24px/1.1 var(--f-display);color:var(--ink);margin:2px 0 6px}
+.medal .rk-bar{width:100%}
+.medal .mx{font:500 12px var(--f-mono);color:var(--ink-soft);margin-top:5px}
+.steps{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:baseline;counter-increment:s;font-size:15px}
+.steps li::before{content:counter(s);font:700 24px/1 var(--f-hand);color:var(--pen);text-align:center}
+.cover-art{margin:6px 0 16px}
+.cover-art .cap{margin-top:6px}
+.partblk{margin-bottom:18px}
+.parthead{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:baseline;margin-bottom:6px}
+.parthead .pr{font:800 22px var(--f-display);color:var(--stamp)}
+.parthead .pt{font:700 17px var(--f-display)}
+.parthead .pc{font:500 12px var(--f-mono);color:var(--ink-soft)}
+.pbar{height:4px;border-radius:2px;background:var(--edge);margin-bottom:6px;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--stamp)}
+.toclist{list-style:none;padding:0;margin:0;display:grid;gap:0}
+.toclist button{width:100%;display:grid;grid-template-columns:2.2em 1fr auto;gap:8px;align-items:center;text-align:left;cursor:pointer;background:none;border:0;padding:7px 6px;border-bottom:1px dotted color-mix(in srgb,var(--ink-soft) 60%,transparent);border-radius:3px;transition:background .15s}
 .toclist button:hover{background:var(--pen-wash)}
 .toclist .n{font:700 18px var(--f-display);color:var(--pen)}
 .toclist .s{font-size:12px;color:var(--ink-soft)}
-.toclist .st{font:700 13px var(--f-mono);color:var(--stamp)}
-.exam{margin-top:18px;padding:12px 14px;border:1.5px solid var(--ink);display:grid;gap:8px}
-.exam .big{font:800 40px/1 var(--f-display)}
-.exam label{font-size:14px;color:var(--ink-soft);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chips{display:flex;gap:4px;align-items:center;white-space:nowrap}
+.chip-st{font-size:15px;color:var(--edge)}
+.chip-st.on{color:var(--stamp)}
+.dot{width:7px;height:7px;border-radius:50%;border:1.5px solid var(--ink-soft)}
+.dot.on{background:var(--good);border-color:var(--good)}
+.exam{margin-top:20px;padding:14px 16px;border:1.5px solid var(--ink);border-radius:4px;display:grid;gap:8px;background:var(--paper)}
+.exam .big{font:800 42px/1 var(--f-display)}
+.exam label:not(.ctl){font-size:14px;color:var(--ink-soft);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.planner{gap:12px}
+.planner .ctl[hidden]{display:none}
+.pl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.pl-grid > div{border:1px solid var(--edge);border-radius:4px;padding:8px 10px;background:var(--paper-2);display:grid;gap:1px;min-width:0}
+.pl-grid span{font:600 10.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.pl-grid b{font:800 21px/1.15 var(--f-display);color:var(--ink)}
+.pl-grid small{font-size:12px;color:var(--ink-soft);line-height:1.3}
+.pl-verdict{padding:10px 12px;border-radius:4px;font-weight:600;border:1.5px solid}
+.pl-verdict.ok{color:var(--good);border-color:color-mix(in srgb,var(--good) 50%,transparent);background:color-mix(in srgb,var(--good) 9%,transparent)}
+.pl-verdict.no{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 50%,transparent);background:color-mix(in srgb,var(--bad) 8%,transparent)}
+.pl-plan table{width:100%}
+.pl-plan tr.more-row{display:none}
+.pl-plan table.all tr.more-row{display:table-row}
+.pl-plan td:first-child{white-space:nowrap;font-family:var(--f-mono);font-size:12.5px}
 
 /* ——— нижняя панель ——— */
-.bar{
-  position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom, 0px));z-index:20;
-  display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:var(--bar);
-  box-shadow:0 10px 30px -8px var(--shadow);backdrop-filter:blur(8px);max-width:calc(100% - 24px);border:1px solid var(--edge)
-}
+.bar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom, 0px));z-index:20;display:flex;align-items:center;gap:2px;padding:6px;border-radius:999px;background:var(--bar);box-shadow:0 12px 32px -8px var(--shadow);backdrop-filter:blur(10px);max-width:calc(100% - 24px);border:1px solid var(--edge);overflow:hidden}
+.bar .prog{position:absolute;left:0;bottom:0;height:3px;background:var(--stamp);transition:width .6s}
 .bar button{border:0;background:none;cursor:pointer;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;flex:none}
 .bar button:hover{background:var(--pen-wash)}
 .bar button:disabled{opacity:.3;cursor:default;background:none}
 .bar svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.bar .ttl{min-width:0;flex:1 1 auto;padding:0 8px;font:600 15px/1.2 var(--f-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:min(360px,46vw)}
+.bar .ttl{min-width:0;flex:1 1 auto;padding:0 8px;font:600 15px/1.2 var(--f-display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:min(360px,40vw)}
 .bar .ttl small{font:500 12px var(--f-mono);color:var(--pen);margin-right:6px}
 
-/* ——— оглавление и тренажёр ——— */
+/* ——— оглавление, тренажёр, шпаргалка ——— */
 .drawer{position:fixed;inset:0;z-index:30;background:color-mix(in srgb,var(--desk) 60%,transparent);display:flex;justify-content:flex-start}
-.drawer .panel{
-  width:min(420px,100%);height:100%;overflow-y:auto;background:var(--paper);
-  padding:calc(20px + env(safe-area-inset-top, 0px)) 20px calc(20px + env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px));
-  box-shadow:10px 0 30px -10px var(--shadow)
-}
+.drawer .panel{width:min(440px,100%);height:100%;overflow-y:auto;background:var(--paper);padding:calc(20px + env(safe-area-inset-top, 0px)) 20px calc(20px + env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px));box-shadow:10px 0 30px -10px var(--shadow)}
 .drawer h3{margin:18px 0 8px}
 .drawer .close{float:right}
 .quiz{position:fixed;inset:0;z-index:30;background:color-mix(in srgb,var(--desk) 70%,transparent);display:grid;place-items:center;padding:16px}
-.quiz .card{
-  width:min(560px,100%);max-height:100%;overflow-y:auto;background:var(--paper);padding:24px;border-radius:3px;box-shadow:0 20px 50px -10px var(--shadow);
-  background-image:linear-gradient(var(--rule) 1px, transparent 1px),linear-gradient(90deg, var(--rule) 1px, transparent 1px);background-size:20px 20px
-}
+.quiz .card{width:min(580px,100%);max-height:100%;overflow-y:auto;background:var(--paper);padding:26px;border-radius:4px;box-shadow:0 20px 50px -10px var(--shadow);background-image:linear-gradient(var(--rule) 1px, transparent 1px),linear-gradient(90deg, var(--rule) 1px, transparent 1px);background-size:20px 20px}
 .quiz .meta{font:500 12px var(--f-mono);color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
+.sheet{position:fixed;inset:0;z-index:35;background:var(--paper);background-image:var(--grain);overflow-y:auto;padding:calc(18px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(40px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px))}
+.sheet .in{max-width:1180px;margin:0 auto}
+.sheet header{position:sticky;top:0;z-index:2;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:10px 0 14px;background:var(--paper);border-bottom:2px solid var(--ink);margin-bottom:18px}
+.sheet header h2{font-size:30px}
+.sheet .cols{columns:340px 3;column-gap:28px}
+.sheet .item{break-inside:avoid;margin:0 0 22px;padding-bottom:6px;border-bottom:1px dotted var(--ink-soft)}
+.sheet .item h3{margin:0 0 6px;font-size:18px}
+.sheet .item h3 span{color:var(--pen);font-style:italic}
+.sheet .item .f{font-size:16px;margin:12px 0 8px}
+.sheet .item ul{margin:4px 0 6px;padding-left:18px;font-size:14px}
+.sheet .ph{column-span:all;font:600 13px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--stamp);margin:6px 0 12px}
 
-/* ——— узко: страницы друг под другом ——— */
-@media (max-width: 900px){
-  .spread{grid-template-columns:1fr;min-height:0}
-  .page{padding:24px 18px 44px}
-  .page.left{border-radius:3px 3px 0 0;box-shadow:inset 0 -20px 24px -22px var(--shadow)}
-  .page.right{border-radius:0 0 3px 3px;box-shadow:inset 0 20px 24px -22px var(--shadow)}
-  .left .folio{left:18px}.right .folio{right:18px}
-  h2{font-size:28px}
-  .book{padding:6px}
-  .stampslot{width:84px;height:84px;top:-30px}
-  .rank{margin-left:0;width:100%}
-  .rk-bar{flex:1 1 80px}
-  .leaf{display:none!important}
-}
-@media (prefers-reduced-motion: reduce){
-  .leaf{display:none!important}
-  .stamp.new{animation:none}
-  *{transition:none!important}
-}
-/* ——— ранг и опыт ——— */
-.rank{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft);margin-left:auto}
-.rank b{font:700 16px var(--f-display);color:var(--ink)}
-.rk-l{font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase}
-.rk-bar{display:inline-block;width:120px;height:8px;border:1.5px solid var(--ink);border-radius:999px;overflow:hidden;background:var(--paper)}
-.rk-bar i{display:block;height:100%;background:repeating-linear-gradient(-45deg,var(--stamp) 0 4px,color-mix(in srgb,var(--stamp) 70%,var(--paper)) 4px 8px);transition:width .6s}
-.rk-xp{font:500 12px var(--f-mono)}
+/* ——— ранг: уведомления ——— */
 .toasts{position:fixed;z-index:40;right:max(16px, env(safe-area-inset-right, 0px));top:calc(14px + env(safe-area-inset-top, 0px));display:grid;gap:8px;justify-items:end;pointer-events:none}
-.toast{background:var(--paper);border:1.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:8px 14px;font-size:14px;animation:tin .35s cubic-bezier(.2,1.4,.4,1)}
+.toast{background:var(--paper);border:1.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:9px 15px;font-size:14px;border-radius:3px;animation:tin .35s cubic-bezier(.2,1.4,.4,1)}
 .toast b{color:var(--good);font-family:var(--f-mono)}
 .toast.rankup{border-color:var(--stamp);box-shadow:3px 3px 0 var(--stamp);padding:12px 18px;display:grid;gap:2px}
 .toast.rankup b{color:var(--stamp);font:800 22px var(--f-display)}
@@ -381,32 +446,105 @@ details.hint summary{cursor:pointer;font:600 18px var(--f-hand);color:var(--ink-
 @keyframes tin{from{transform:translateX(30px);opacity:0}}
 
 /* ——— история в начале главы ——— */
-.hook{position:relative;margin:6px 0 24px;padding:20px 20px 12px;background:var(--paper-2);border:1px solid var(--edge);transform:rotate(-.5deg);box-shadow:0 12px 20px -14px var(--shadow)}
-.hook::before{content:"";position:absolute;top:-11px;left:50%;width:96px;height:22px;transform:translateX(-50%) rotate(2deg);background:color-mix(in srgb,var(--glow) 38%,transparent)}
-.hk-eye{font:600 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--stamp)}
-.hook h3{margin:4px 0 8px;font-size:23px;line-height:1.15}
-.hook p{margin:0 0 9px;max-width:62ch}
-.hook .big{font:800 30px/1.1 var(--f-display);color:var(--pen);margin:6px 0 10px}
+.hook{position:relative;margin:4px 0 26px;padding:22px 22px 12px;background:var(--paper-2);background-image:var(--grain);border:1px solid var(--edge);transform:rotate(-.5deg);box-shadow:0 14px 22px -16px var(--shadow)}
+.hook::before{content:"";position:absolute;top:-11px;left:50%;width:100px;height:22px;transform:translateX(-50%) rotate(2deg);background:color-mix(in srgb,var(--glow) 40%,transparent)}
+.hk-eye{font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--stamp)}
+.hook h3{margin:4px 0 8px;font-size:24px;line-height:1.15;display:block}
+.hook h3::before{content:none}
+.hook p{margin:0 0 9px;max-width:64ch}
+.hook .big{font:800 30px/1.1 var(--f-display);color:var(--pen);margin:8px 0 12px}
 .swatch{display:inline-block;width:1.1em;height:1.1em;vertical-align:-.15em;border:1px solid var(--ink);margin-right:.3em}
 
 /* ——— живые обложки ——— */
-.cover-art{margin:6px 0 14px}
-.cover-art .cap{margin-top:4px}
-.crt{
-  margin:0;background:#0a0f0b;color:#a8f0a0;font:13px/1.45 var(--f-mono);padding:16px 18px;border-radius:12px;
-  border:10px solid #23262a;box-shadow:inset 0 0 40px rgba(0,0,0,.8), 0 14px 26px -14px var(--shadow);
-  text-shadow:0 0 6px rgba(120,255,120,.45);white-space:pre;overflow-x:auto;position:relative;
-  background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px)
-}
+.crt{margin:0;background:#0a0f0b;color:#a8f0a0;font:13px/1.45 var(--f-mono);padding:16px 18px;border-radius:14px;border:12px solid #23262a;box-shadow:inset 0 0 40px rgba(0,0,0,.8), 0 16px 28px -14px var(--shadow);text-shadow:0 0 6px rgba(120,255,120,.45);white-space:pre;overflow-x:auto;position:relative;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px)}
 .crt .cur{display:inline-block;width:.6em;background:#a8f0a0;animation:blink 1s steps(1) infinite}
 
-.more{margin-top:18px;padding:14px 16px;background:var(--paper);border:1.5px solid var(--ink-soft);border-radius:3px;display:grid;gap:16px}
-.more .lbl{margin:0}
-.mq p{margin:0 0 8px}
-.mq form{display:flex;gap:8px;flex-wrap:wrap}
-.mq input{flex:1 1 140px}
-.mn{font:600 13px var(--f-mono);color:var(--pen);white-space:nowrap}
-.mn.done::after{content:" ✓";color:var(--good)}
+/* ——— пошаговый режим: одна колонка, один кусок за раз ——— */
+.book.stepmode{max-width:880px;margin:0 auto}
+.book.stepmode .spread{grid-template-columns:1fr;min-height:0}
+.book.stepmode .spread::after,.book.stepmode .ribbon{display:none}
+.book.stepmode .page{padding:30px 44px 60px;box-shadow:none}
+.book.stepmode .page.left{border-radius:4px 4px 0 0;padding-bottom:20px}
+.book.stepmode .page.right{border-radius:0 0 4px 4px;padding-top:6px}
+.book.stepmode .page.right > .runhead{display:none}
+.book.stepmode .page.right::before{display:none}
+.book.stepmode .page.left:has(+ .page.right[hidden]){border-radius:4px}
+.book.stepmode .opener{min-height:0;margin-bottom:12px}
+.book.stepmode .bignum{font-size:96px;top:-12px}
+.book.stepmode .folio{display:none}
+.stepbar{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 12px;margin:0 -2px 6px;scrollbar-width:thin}
+.sp{flex:none;display:flex;gap:6px;align-items:center;border:1.5px solid var(--edge);border-radius:999px;padding:6px 12px;font:600 12.5px var(--f-body);background:var(--paper);cursor:pointer;color:var(--ink-soft);transition:background .15s}
+.sp b{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--paper-2);font:700 11px var(--f-mono);color:var(--ink-soft)}
+.sp:hover{border-color:var(--pen)}
+.sp.done{border-color:color-mix(in srgb,var(--good) 60%,transparent);color:var(--ink)}
+.sp.done b{background:var(--good);color:var(--paper)}
+.sp.cur{background:var(--pen);border-color:var(--pen);color:var(--paper)}
+.sp.cur b{background:var(--paper);color:var(--pen)}
+.stephead{position:relative;display:grid;gap:2px;padding:12px 16px 16px;margin-bottom:18px;border-radius:6px;background:var(--paper-2);border:1px solid var(--edge);overflow:hidden}
+.stephead span{font:600 11.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--stamp)}
+.stephead b{font:800 22px/1.2 var(--f-display)}
+.stephead small{font-size:13px;color:var(--ink-soft)}
+.stephead i{position:absolute;left:0;bottom:0;height:4px;background:var(--stamp);transition:width .4s}
+.stepnav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:28px;padding-top:18px;border-top:1.5px dashed var(--edge);flex-wrap:wrap}
+.btn.big{font-size:17px;padding:11px 22px}
+.sn-mid{flex:1 1 auto;display:flex;justify-content:center}
+
+/* ——— режимы концентрации ——— */
+.fopt{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;padding:12px;border:1.5px solid var(--edge);border-radius:6px;margin-bottom:8px;cursor:pointer;background:var(--paper)}
+.fopt:has(input:checked){border-color:var(--pen);background:var(--pen-wash)}
+.fopt input{width:20px;height:20px;margin-top:2px;accent-color:var(--pen)}
+.fopt b{display:block;font-size:16px}
+.fopt small{display:block;font-size:13.5px;color:var(--ink-soft);line-height:1.4}
+.timerchip{position:fixed;z-index:39;left:50%;transform:translateX(-50%);top:calc(10px + env(safe-area-inset-top, 0px));display:flex;gap:10px;align-items:center;padding:8px 10px 8px 14px;border-radius:999px;background:var(--paper);border:2px solid var(--pen);box-shadow:0 8px 20px -8px var(--shadow);font:600 16px var(--f-mono);font-variant-numeric:tabular-nums}
+.timerchip.break{border-color:var(--good)}
+.timerchip b{font:700 13px var(--f-body);color:var(--pen)}
+.timerchip.break b{color:var(--good)}
+.timerchip button{border:0;background:var(--paper-2);border-radius:50%;width:26px;height:26px;cursor:pointer}
+.calm body::after{display:none}
+.calm .page.left,.calm .hook,.calm .sheet{background-image:none}
+.calm .hook{transform:none}
+.calm .hook::before,.calm .bignum,.calm .ribbon,.calm .leaf{display:none!important}
+.calm .opener{padding-right:0;min-height:0}
+.calm .theory > p:first-of-type::first-letter{float:none;font:inherit;color:inherit;margin:0}
+.calm .flapbtn,.calm .flapbtn:hover,.calm .btn:hover{transform:none}
+.calm .reveal,.calm .stamp.new{animation:none}
+.calm .book{background:linear-gradient(var(--cloth),var(--cloth-2))}
+.bigtext body{font-size:18.5px;line-height:1.78}
+.bigtext .f{font-size:20.5px}
+.bigtext .sum,.bigtext .examq .ans{font-size:17px}
+.bigtext h2{font-size:40px}
+.ruler .theory:hover > *:not(:hover),.ruler .hook:hover p:not(:hover),.ruler .sum:hover li:not(:hover){opacity:.32;transition:opacity .2s}
+.ruler .theory > *:hover,.ruler .hook p:hover{background:color-mix(in srgb,var(--glow) 12%,transparent);border-radius:3px}
+
+/* ——— узко ——— */
+@media (max-width: 900px){
+  .spread{grid-template-columns:1fr;min-height:0}
+  .spread::after{display:none}
+  .page{padding:26px 18px 48px}
+  .page.left{border-radius:4px 4px 0 0;box-shadow:none}
+  .page.right{border-radius:0 0 4px 4px;box-shadow:none}
+  .page.right::before{left:12px}
+  .left .folio{left:18px}.right .folio{right:18px}
+  h2{font-size:29px}
+  .opener{padding-right:70px;min-height:70px}
+  .bignum{font-size:92px;top:-10px}
+  .book{padding:7px}
+  .ribbon{display:none}
+  .stampslot{width:86px;height:86px;top:-32px}
+  .rank{margin-left:0;width:100%}
+  .rk-bar{flex:1 1 80px}
+  .leaf{display:none!important}
+  .fig{padding:10px}
+  .book.stepmode .page{padding:22px 16px 48px}
+  .stephead b{font-size:19px}
+  .btn.big{font-size:16px;padding:10px 16px}
+  .timerchip{top:auto;bottom:calc(76px + env(safe-area-inset-bottom, 0px))}
+}
+@media (prefers-reduced-motion: reduce){
+  .leaf{display:none!important}
+  .stamp.new,.reveal{animation:none}
+  *{transition:none!important}
+}
 [hidden]{display:none!important}
 .blink{animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
@@ -428,27 +566,33 @@ details.hint summary{cursor:pointer;font:600 18px var(--f-hand);color:var(--ink-
       <section class="page right" id="pR"></section>
       <div class="leaf" id="leaf"></div>
     </div>
+    <div class="ribbon" aria-hidden="true"></div>
   </div>
 </main>
 
 <nav class="bar" aria-label="Листание">
-  <button id="bMenu" aria-label="Оглавление"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-  <button id="bPrev" aria-label="Предыдущая глава"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <i class="prog" id="barProg"></i>
+  <button id="bMenu" aria-label="Оглавление" title="Оглавление"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <button id="bPrev" aria-label="Предыдущая глава" title="Назад (←)"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
   <div class="ttl" id="bTitle"></div>
-  <button id="bNext" aria-label="Следующая глава"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
-  <button id="bQuiz" aria-label="Тренажёр"><svg viewBox="0 0 24 24"><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5V14M12 17.5v.01"/><circle cx="12" cy="12" r="9"/></svg></button>
-  <button id="bTheme" aria-label="Сменить тему"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor" style="fill:var(--ink)"/></svg></button>
+  <button id="bNext" aria-label="Следующая глава" title="Вперёд (→)"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button id="bFocus" aria-label="Режим концентрации и таймер" title="Фокус: пошаговый режим и таймер"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></button>
+  <button id="bSheet" aria-label="Шпаргалка" title="Шпаргалка: все формулы"><svg viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></button>
+  <button id="bQuiz" aria-label="Тренажёр" title="Тренажёр"><svg viewBox="0 0 24 24"><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5V14M12 17.5v.01"/><circle cx="12" cy="12" r="9"/></svg></button>
+  <button id="bTheme" aria-label="Сменить тему" title="Светлая / тёмная тема"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor" style="fill:var(--ink)"/></svg></button>
 </nav>
 
 <div class="toasts" id="toasts" aria-live="polite"></div>
+<div class="timerchip" id="timerChip" hidden aria-live="off"></div>
+<div class="quiz" id="focus" hidden><div class="card" id="focusCard" role="dialog" aria-modal="true" aria-label="Режим концентрации"></div></div>
 <div class="drawer" id="toc" hidden><div class="panel" id="tocPanel"></div></div>
 <div class="quiz" id="quiz" hidden><div class="card" id="quizCard" role="dialog" aria-modal="true" aria-label="Тренажёр"></div></div>
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-label="Шпаргалка"><div class="in" id="sheetIn"></div></div>
 
 <script>
 /* ——— общие инструменты для глав ——— */
 window.BOOKS = {
-  tv:{key:'tv',name:'Случай',sub:'Теория вероятностей и математическая статистика',src:'По «Руководству к решению задач по теории вероятностей и математической статистике» В. Е. Гмурмана',moreTitle:'Ещё задачи из Гмурмана',ranks:['Новичок за игральным столом','Ученик Паскаля','Знаток Бернулли','Наследник Гаусса','Магистр Лапласа'],lessons:[]},
-  vms:{key:'vms',name:'Бит',sub:'Вычислительные машины и системы',src:'По практической работе №1, лабораторным 1–4 и книге А. Зубкова «Assembler для DOS, Windows и Unix»',moreTitle:'Ещё задачи: практическая №1 и лабы',ranks:['Пользователь DOS','Повелитель Norton Commander','Мастер отладчика TD','Ассемблерщик','Хакер реального режима'],lessons:[]}
+  tv:{key:'tv',name:'Случай',sub:'Теория вероятностей и математическая статистика',src:'По «Руководству к решению задач по теории вероятностей и математической статистике» В. Е. Гмурмана',moreTitle:'Ещё задачи из Гмурмана',ranks:['Новичок за игральным столом','Ученик Паскаля','Знаток Бернулли','Наследник Гаусса','Магистр Лапласа'],lessons:[]}
 };
 const U = window.U = {
   h(tag, props, ...kids){
@@ -505,7 +649,7 @@ const U = window.U = {
     const p = g.createPattern(c,'repeat'); p.setTransform && p.setTransform(new DOMMatrix().scale(1/d)); return p;
   },
   num(s){
-    s = String(s).trim().replace(/\s/g,'').replace(',', '.');
+    s = String(s).trim().replace(/\s/g,'').replace('−','-').replace(',', '.');
     if (/^[-+]?\d*\.?\d+\/\d*\.?\d+$/.test(s)){ const [a,b]=s.split('/'); return +a/+b; }
     if (/^[-+]?(\d+\.?\d*|\.\d+)(e[-+]?\d+)?$/i.test(s)) return +s;
     return NaN;
@@ -522,6 +666,7 @@ const U = window.U = {
   Phi(x){ return 0.5*U.erf(x/Math.SQRT2); },            // функция Лапласа Ф(x), как в Гмурмане
   phi(x){ return Math.exp(-x*x/2)/Math.sqrt(2*Math.PI); },
   PhiInv(v){ let a=0,b=6; for (let i=0;i<60;i++){ const m=(a+b)/2; if (U.Phi(m)<v) a=m; else b=m; } return (a+b)/2; },
+  gauss(){ const u = Math.random()||1e-9, v = Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); },
   fr(a,b){ return `<span class="fr"><span>${a}</span><span>${b}</span></span>`; },
   axes(g, x0, y0, x1, y1, c){ g.strokeStyle=c.ink; g.lineWidth=1.3; g.beginPath(); g.moveTo(x0,y1); g.lineTo(x0,y0); g.lineTo(x1,y0); g.stroke(); },
   text(g, s, x, y, o={}){ g.font=U.font(o.size||12,o.kind,o.w); g.fillStyle=o.color||U.col().ink; g.textAlign=o.align||'left'; g.textBaseline=o.base||'alphabetic'; g.fillText(s,x,y); }
@@ -1255,24 +1400,544 @@ BOOKS.tv.cover = el => {
 })();
 
 </script>
+<script>
+/* Книга «Случай», продолжение: главы по Гмурману гл. 7–9, 11–17, части, итоги и вопросы к экзамену */
+(() => {
+const {h, fr} = U;
+const add = L => BOOKS.tv.lessons.push(L);
+const R = (n,d) => U.fmt(n,d);
+const P = (n, q, t, tol, ans, hint, ph) => ({n, q, ans, hint, ph, check: s => U.near(s, t, tol)});
+const range = (a,b,n) => Array.from({length:n},(_,i)=>a+(b-a)*i/(n-1));
 
+/* 12. Функции случайного аргумента */
+add({
+  id:'tv12', title:'Функции случайного аргумента', src:'Гмурман, гл. 7',
+  theory:`<p>Если каждому значению X отвечает одно значение Y, то <b>Y = φ(X)</b> — функция случайного аргумента. Это тоже случайная величина, и её закон выводится из закона X.</p>
+  <h3>Дискретный случай</h3>
+  <p>Значения yᵢ = φ(xᵢ) получают те же вероятности pᵢ. Если разные xᵢ дают одно и то же y, их вероятности <b>складывают</b>.</p>
+  <h3>Непрерывный случай</h3>
+  <div class="f">g(y) = f(ψ(y))·|ψ′(y)|<small>φ монотонна и дифференцируема, x = ψ(y) — обратная функция; f — плотность X, g — плотность Y</small></div>
+  <p>Если φ не монотонна, интервал разбивают на участки монотонности и складывают слагаемые по всем корням: g(y) = Σ f(ψᵢ(y))·|ψᵢ′(y)|.</p>
+  <h3>Математическое ожидание функции</h3>
+  <div class="f">M[φ(X)] = Σ φ(xᵢ)pᵢ, &nbsp; M[φ(X)] = ∫ φ(x) f(x) dx<small>закон Y находить не обязательно. Но в общем случае M[φ(X)] ≠ φ(M(X))</small></div>
+  <p>Для линейной функции Y = aX + b: M(Y) = aM(X) + b, D(Y) = a²D(X). Линейная функция нормальной величины снова нормальна.</p>
+  <h3>Функция двух аргументов</h3>
+  <p>Z = X + Y для дискретных: перебирают все пары (xᵢ, yⱼ), для независимых P(Z = xᵢ + yⱼ) = P(xᵢ)·P(yⱼ). Для независимых непрерывных — <b>композиция</b> (свёртка):</p>
+  <div class="f">g(z) = ∫ f₁(x)·f₂(z − x) dx</div>`,
+  predict:{q:'X распределена равномерно на (0; 2), M(X) = 1. Чему равно M(X²)?', opts:['1 — ведь это (M X)²','4/3','2'], a:1,
+    why:'M(X²) = ∫₀² x²·½ dx = 8/6 = 4/3. Квадрат среднего (1) меньше среднего квадрата (4/3) ровно на D(X) = 1/3: M(X²) = D(X) + M²(X).'},
+  flap:`<p><b>Задача 374.</b> X: 3, 6, 10 с вероятностями 0,2; 0,1; 0,7; Y = 2X + 1. Значения Y: 7, 13, 21 с теми же вероятностями 0,2; 0,1; 0,7. M(Y) = 2M(X) + 1 = 2·8,2 + 1 = 17,4.</p>
+  <p><b>Задача 401а.</b> X: 10, 12, 16 (0,4; 0,1; 0,5), Y: 1, 2 (0,2; 0,8), независимы. Z = X + Y: 11 (0,08), 12 (0,32), 13 (0,02), 14 (0,08), 17 (0,10), 18 (0,40). Сумма вероятностей равна 1.</p>
+  <p><b>Красивый факт:</b> если R равномерна на (0; 1), то −ln R распределена по показательному закону. Проверь на рисунке — на этом держится метод Монте-Карло из главы 18.</p>`,
+  figCap:'20 000 значений X пропущены через функцию φ. Гистограмма — то, что получилось; пунктир — плотность g(y) по формуле.',
+  try:'Выбери «X равномерна» и φ = −ln X: получится показательный закон.',
+  ch:{q:'Дискретная X: значения 3, 6, 10 с вероятностями 0,2; 0,1; 0,7 (задача 374). Найдите M(Y) для Y = 2X + 1.', check:s=>U.near(s,17.4,0.001), ans:'17,4', hint:'M(aX + b) = aM(X) + b; M(X) = 0,6 + 0,6 + 7.'},
+  fig(el){
+    let base = 0, fn = 0;
+    const B = [['X равномерна на (0; 1)', ()=>Math.random()], ['X нормальна N(0; 1)', ()=>U.gauss()]];
+    const F = [
+      {n:'φ = 2X + 1', f:x=>2*x+1, g:[y=>y>1&&y<3?.5:0, y=>U.phi((y-1)/2)/2]},
+      {n:'φ = X²', f:x=>x*x, g:[y=>y>0&&y<1?1/(2*Math.sqrt(y)):0, y=>y>0?Math.exp(-y/2)/Math.sqrt(2*Math.PI*y):0]},
+      {n:'φ = eˣ', f:x=>Math.exp(x), g:[y=>y>1&&y<Math.E?1/y:0, y=>y>0?U.phi(Math.log(y))/y:0]},
+      {n:'φ = −ln X', f:x=>x>0?-Math.log(x):NaN, g:[y=>y>0?Math.exp(-y):0, null]}];
+    el.append(h('div',{class:'row'}, U.select('tv12-b', B.map(b=>b[0]), v=>{base=v; draw();}), U.select('tv12-f', F.map(f=>f.n), v=>{fn=v; draw();})));
+    const cv = U.canvas(el, .58), out = h('div',{class:'readout'}); el.append(out);
+    function draw(){
+      const {g,W,H} = cv.fit(), c = U.col(), Fn = F[fn], gfun = Fn.g[base];
+      const xs = Array.from({length:20000}, B[base][1]), ys = xs.map(Fn.f).filter(isFinite).sort((a,b)=>a-b);
+      if (!ys.length || !gfun){ out.innerHTML = '<span class="bad">−ln X определён только для X &gt; 0 — выбери равномерный X.</span>'; return; }
+      const lo = ys[Math.floor(ys.length*.005)], hi = ys[Math.floor(ys.length*.995)], nb = 40, bw = (hi-lo)/nb || 1;
+      const cnt = new Array(nb).fill(0); ys.forEach(y=>{ const k = Math.floor((y-lo)/bw); if (k>=0&&k<nb) cnt[k]++; });
+      const dens = cnt.map(n=>n/ys.length/bw);
+      const curve = range(lo,hi,200).map(y=>[y,gfun(y)]), mx = Math.max(...dens, ...curve.map(p=>isFinite(p[1])?p[1]:0).slice(2))*1.1 || 1;
+      const ax = 36, ay = 10, aw = W-ax-10, ah = H-ay-28, X = y => ax+(y-lo)/(hi-lo)*aw, Y = v => ay+ah-Math.min(v,mx)/mx*ah;
+      U.axes(g,ax,ay+ah,ax+aw,ay,c);
+      dens.forEach((d,k)=>{ g.fillStyle = U.hatch(g,c.pen,5); g.fillRect(X(lo+k*bw),Y(d),aw/nb-1,ay+ah-Y(d)); g.strokeStyle=c.ink; g.lineWidth=.8; g.strokeRect(X(lo+k*bw),Y(d),aw/nb-1,ay+ah-Y(d)); });
+      g.save(); g.setLineDash([6,4]); g.strokeStyle=c.stamp; g.lineWidth=2.2; g.beginPath(); let st = false;
+      curve.forEach(([y,v])=>{ if (!isFinite(v)) { st=false; return; } st ? g.lineTo(X(y),Y(v)) : g.moveTo(X(y),Y(v)); st = true; }); g.stroke(); g.restore();
+      for (let i=0;i<=4;i++){ const v = lo+(hi-lo)*i/4; U.text(g,R(v,2),X(v),ay+ah+14,{size:10,align:'center',color:c.soft,kind:'mono'}); }
+      const mX = xs.reduce((a,b)=>a+b,0)/xs.length, mY = ys.reduce((a,b)=>a+b,0)/ys.length;
+      out.innerHTML = `M[φ(X)] ≈ <b>${R(mY,3)}</b> &nbsp;·&nbsp; φ(M(X)) = ${R(Fn.f(mX),3)} ${Math.abs(mY-Fn.f(mX))>.05?'<span class="hot">— не совпадают!</span>':'<span class="good">— совпадают (φ линейна)</span>'}`;
+    }
+    return draw;
+  }
+});
+
+/* 13. Система двух случайных величин */
+add({
+  id:'tv13', title:'Система двух случайных величин. Корреляция', src:'Гмурман, гл. 8',
+  theory:`<p>Пара (X, Y) — <b>двумерная случайная величина</b>. Дискретную задают таблицей вероятностей pᵢⱼ = P(X = xᵢ, Y = yⱼ), сумма всех pᵢⱼ равна 1.</p>
+  <div class="f">P(X = xᵢ) = Σⱼ pᵢⱼ, &nbsp; P(Y = yⱼ) = Σᵢ pᵢⱼ<small>законы составляющих: суммы по строкам и столбцам таблицы</small></div>
+  <h3>Функция и плотность распределения</h3>
+  <div class="f">F(x, y) = P(X &lt; x, Y &lt; y), &nbsp; f(x, y) = ${fr('∂²F','∂x∂y')}, &nbsp; P((X,Y) ∈ D) = ∬<sub>D</sub> f(x,y) dx dy<small>f₁(x) = ∫ f(x, y) dy, f₂(y) = ∫ f(x, y) dx; ∬ f = 1</small></div>
+  <h3>Условные законы и независимость</h3>
+  <div class="f">P(xᵢ | yⱼ) = ${fr('pᵢⱼ','P(Y = yⱼ)')}, &nbsp; φ(x | y) = ${fr('f(x, y)','f₂(y)')}</div>
+  <p>X и Y <b>независимы</b>, если pᵢⱼ = P(xᵢ)·P(yⱼ) для всех клеток (для непрерывных f(x, y) = f₁(x)·f₂(y)). <b>Условное математическое ожидание</b> M(Y | X = x) как функция x называется <b>регрессией</b> Y на X.</p>
+  <h3>Корреляционный момент и коэффициент корреляции</h3>
+  <div class="f">μₓᵧ = M[(X − mₓ)(Y − mᵧ)] = M(XY) − M(X)·M(Y), &nbsp; rₓᵧ = ${fr('μₓᵧ','σₓσᵧ')}<small>|r| ≤ 1; |r| = 1 ⇔ Y линейно зависит от X; независимые величины некоррелированы, но обратное неверно</small></div>
+  <p>Для нормальной системы некоррелированность и независимость равносильны. Важная формула: D(X + Y) = D(X) + D(Y) + 2μₓᵧ.</p>`,
+  predict:{q:'Коэффициент корреляции rₓᵧ = 0. Значит ли это, что X и Y независимы?', opts:['Да, всегда','Нет: они только некоррелированы','Да, если обе дискретные'], a:1,
+    why:'Пусть X симметрична относительно нуля, а Y = X². Y полностью определяется X, но r = 0. Корреляция ловит только линейную связь. Включи на рисунке режим «Y = X²».'},
+  flap:`<p><b>Задача 409.</b> Законы составляющих — суммы по столбцам и строкам: X: 26, 30, 41, 50 с вероятностями 0,14; 0,42; 0,19; 0,25; Y: 2,3 и 2,7 с вероятностями 0,29 и 0,71.</p>
+  <p><b>Задача 422.</b> P(Y = 10) = 0,25 + 0,10 = 0,35. P(X = 3 | Y = 10) = 0,25/0,35 = 5/7; P(X = 6 | Y = 10) = 2/7.</p>
+  <p><b>Как считать r по таблице:</b> найти M(X), M(Y), M(XY) = Σ xᵢyⱼpᵢⱼ, σₓ, σᵧ; затем r = (M(XY) − M(X)M(Y)) / (σₓσᵧ).</p>`,
+  figCap:'300 точек системы (X, Y). Синяя прямая — регрессия Y на X, фиолетовая — X на Y. При |r| = 1 они сливаются.',
+  try:'Сдвинь r к ±1 — облако сжимается в прямую. Потом включи «Y = X²»: связь есть, а r ≈ 0.',
+  ch:{q:'Задача 422. Дискретная (X, Y): X ∈ {3, 6}, Y ∈ {10, 14, 18}; p(3;10) = 0,25, p(6;10) = 0,10, p(3;14) = 0,15, p(6;14) = 0,05, p(3;18) = 0,32, p(6;18) = 0,13. Найдите P(X = 3 | Y = 10).', check:s=>U.near(s,5/7,0.003), ans:'5/7 ≈ 0,714', hint:'P(Y = 10) — сумма столбца Y = 10.'},
+  fig(el){
+    let r = .6, quad = false, pts = [];
+    const sr = U.slider('tv13-r','r',-1,1,.05,r,v=>R(v,2),v=>{r=v; gen();});
+    const bq = U.btn('Y = X² (r ≈ 0)', ()=>{ quad=!quad; bq.setAttribute('aria-pressed',quad); gen(); });
+    el.append(h('div',{class:'ctls'}, sr), h('div',{class:'row'}, bq, U.btn('Новая выборка', ()=>gen())));
+    const cv = U.canvas(el, .75), out = h('div',{class:'readout'}); el.append(out);
+    function gen(){ pts = Array.from({length:300},()=>{ const a = U.gauss(), b = U.gauss(); return quad ? [a, a*a-1] : [a, r*a+Math.sqrt(1-r*r)*b]; }); draw(); }
+    function draw(){
+      if (!pts.length) return;
+      const {g,W,H} = cv.fit(), c = U.col();
+      const n = pts.length, mx = pts.reduce((s,p)=>s+p[0],0)/n, my = pts.reduce((s,p)=>s+p[1],0)/n;
+      const sx = Math.sqrt(pts.reduce((s,p)=>s+(p[0]-mx)**2,0)/n), sy = Math.sqrt(pts.reduce((s,p)=>s+(p[1]-my)**2,0)/n);
+      const rr = pts.reduce((s,p)=>s+(p[0]-mx)*(p[1]-my),0)/n/(sx*sy);
+      const L = 3.5, X = x => 20+(x+L)/(2*L)*(W-40), Y = y => H/2-(y)/(L)*(H/2-14);
+      g.strokeStyle = c.rule; g.lineWidth = 1; g.beginPath(); g.moveTo(X(-L),Y(0)); g.lineTo(X(L),Y(0)); g.moveTo(X(0),Y(-L)); g.lineTo(X(0),Y(L)); g.stroke();
+      g.fillStyle = c.ink; pts.forEach(([x,y])=>{ g.globalAlpha=.55; g.beginPath(); g.arc(X(x),Y(y),2.3,0,7); g.fill(); }); g.globalAlpha=1;
+      const line = (k, b, col, inv) => { g.strokeStyle = col; g.lineWidth = 2.4; g.beginPath(); if (!inv){ g.moveTo(X(-L),Y(k*(-L-mx)+my)); g.lineTo(X(L),Y(k*(L-mx)+my)); } else { g.moveTo(X(k*(-L-my)+mx),Y(-L)); g.lineTo(X(k*(L-my)+mx),Y(L)); } g.stroke(); };
+      line(rr*sy/sx, 0, c.pen, false); line(rr*sx/sy, 0, c.stamp, true);
+      out.innerHTML = `выборочный r = <b>${R(rr,3)}</b> · регрессия Y на X: y − ȳ = ${R(rr*sy/sx,3)}(x − x̄)${quad?' <span class="hot">— связь функциональная, а r ≈ 0</span>':''}`;
+    }
+    gen();
+    return draw;
+  }
+});
+
+/* 14. Выборка и её характеристики */
+add({
+  id:'tv14', title:'Выборка, гистограмма и сводные характеристики', src:'Гмурман, гл. 9, 11',
+  theory:`<p><b>Генеральная совокупность</b> — все объекты, <b>выборка</b> — отобранные n из них. Выборка должна быть <b>репрезентативной</b>: правильно представлять пропорции генеральной совокупности. Отбор бывает повторный и бесповторный.</p>
+  <p>Наблюдавшиеся значения xᵢ — <b>варианты</b>, упорядоченные — <b>вариационный ряд</b>. Число наблюдений варианты — <b>частота</b> nᵢ, относительная частота wᵢ = nᵢ/n. Перечень вариант и частот — <b>статистическое распределение</b> выборки.</p>
+  <div class="f">F*(x) = ${fr('nₓ','n')}<small>эмпирическая функция распределения: nₓ — число вариант, меньших x. Неубывающая, ступенчатая, от 0 до 1</small></div>
+  <p><b>Полигон частот</b> — ломаная через точки (xᵢ, nᵢ). <b>Гистограмма</b> — прямоугольники на интервалах длины h высотой nᵢ/h; их площадь равна n (для относительных частот — 1).</p>
+  <h3>Сводные характеристики</h3>
+  <div class="f">x̄ = ${fr('Σnᵢxᵢ','n')}, &nbsp; D<sub>в</sub> = ${fr('Σnᵢxᵢ²','n')} − x̄², &nbsp; σ<sub>в</sub> = √D<sub>в</sub></div>
+  <p><b>Мода</b> M₀ — варианта с наибольшей частотой. <b>Медиана</b> mₑ — варианта в середине вариационного ряда. <b>Асимметрия</b> aₛ = m₃/σ³ (скошенность), <b>эксцесс</b> eₖ = m₄/σ⁴ − 3 (островершинность; у нормального закона оба равны 0); mₖ — центральные эмпирические моменты.</p>
+  <h3>Метод произведений</h3>
+  <div class="f">uᵢ = ${fr('xᵢ − C','h')}, &nbsp; x̄ = h·M*(u) + C, &nbsp; D<sub>в</sub> = h²·[M*(u²) − (M*(u))²]<small>C — «ложный нуль» (варианта с наибольшей частотой), h — шаг равноотстоящих вариант. Условные варианты uᵢ — маленькие целые числа</small></div>
+  <p>Если варианты получены группировкой по интервалам длины h, дисперсию уточняют <b>поправкой Шеппарда</b>: D′ = D<sub>в</sub> − h²/12.</p>`,
+  predict:{q:'В выборке 1, 2, 2, 3, 100 какая характеристика лучше описывает «типичное» значение?', opts:['Средняя x̄','Медиана','Дисперсия'], a:1,
+    why:'x̄ = 21,6 — его утащил один выброс 100. Медиана = 2 к выбросам устойчива. Поэтому «медианная зарплата» честнее средней.'},
+  flap:`<p><b>Задача 524а методом произведений.</b> Варианты 18,6 … 20,6 с шагом h = 0,4 и частотами 4, 6, 30, 40, 18, 2 (n = 100). Ложный нуль C = 19,8 (наибольшая частота 40). Условные варианты u = −3, −2, −1, 0, 1, 2.</p>
+  <p>M*(u) = (−12 − 12 − 30 + 0 + 18 + 4)/100 = −0,32; x̄ = 0,4·(−0,32) + 19,8 = <b>19,672</b>.</p>
+  <p>M*(u²) = (36 + 24 + 30 + 0 + 18 + 8)/100 = 1,16; D = 0,16·(1,16 − 0,1024) = <b>0,169</b>.</p>`,
+  figCap:'Гистограмма случайной выборки, полигон частот поверх неё и эмпирическая функция F*(x) снизу.',
+  try:'Выбери показательный закон: асимметрия станет заметно больше нуля, медиана уйдёт левее средней.',
+  ch:{q:'Задача 524а. Варианты 18,6; 19,0; 19,4; 19,8; 20,2; 20,6 с частотами 4; 6; 30; 40; 18; 2. Найдите выборочную среднюю.', check:s=>U.near(s,19.672,0.0015), ans:'19,672', hint:'Метод произведений: C = 19,8, h = 0,4. Или напрямую Σnᵢxᵢ/100.'},
+  fig(el){
+    let d = 0, n = 200, k = 12, xs = [];
+    const D = [['Нормальный', ()=>10+2*U.gauss()], ['Показательный', ()=>-Math.log(Math.random()||1e-9)*2+5], ['Равномерный', ()=>5+10*Math.random()]];
+    const gen = () => { xs = Array.from({length:n}, D[d][1]).sort((a,b)=>a-b); draw(); };
+    el.append(h('div',{class:'row'}, U.select('tv14-d', D.map(x=>x[0]), v=>{d=v; gen();}), U.btn('Новая выборка', gen)),
+      h('div',{class:'ctls'}, U.slider('tv14-n','n',20,2000,10,n,null,v=>{n=v; gen();}), U.slider('tv14-k','интервалов',4,30,1,k,null,v=>{k=v; draw();})));
+    const cv = U.canvas(el, .7), out = h('div',{class:'readout'}); el.append(out);
+    function draw(){
+      if (!xs.length) return;
+      const {g,W,H} = cv.fit(), c = U.col();
+      const lo = xs[0], hi = xs[xs.length-1], bw = (hi-lo)/k || 1, cnt = new Array(k).fill(0);
+      xs.forEach(x=>cnt[Math.min(k-1, Math.floor((x-lo)/bw))]++);
+      const ax = 34, aw = W-ax-10, h1 = H*.62, ay = 8, ah = h1-24, mx = Math.max(...cnt)*1.12;
+      const X = v => ax+(v-lo)/(hi-lo)*aw, Y = v => ay+ah-v/mx*ah;
+      U.axes(g,ax,ay+ah,ax+aw,ay,c);
+      cnt.forEach((m,i)=>{ g.fillStyle = U.hatch(g,c.pen,5); g.fillRect(X(lo+i*bw),Y(m),aw/k,ay+ah-Y(m)); g.strokeStyle=c.ink; g.lineWidth=.9; g.strokeRect(X(lo+i*bw),Y(m),aw/k,ay+ah-Y(m)); });
+      g.strokeStyle = c.stamp; g.lineWidth = 2; g.beginPath(); cnt.forEach((m,i)=>{ const x = X(lo+(i+.5)*bw); i?g.lineTo(x,Y(m)):g.moveTo(x,Y(m)); }); g.stroke();
+      cnt.forEach((m,i)=>{ g.fillStyle=c.stamp; g.beginPath(); g.arc(X(lo+(i+.5)*bw),Y(m),3,0,7); g.fill(); });
+      for (let i=0;i<=4;i++){ const v = lo+(hi-lo)*i/4; U.text(g,R(v,1),X(v),ay+ah+13,{size:10,align:'center',color:c.soft,kind:'mono'}); }
+      const by = h1+6, bh = H-by-8; U.axes(g,ax,by+bh,ax+aw,by,c);
+      g.strokeStyle = c.pen; g.lineWidth = 1.6; g.beginPath(); g.moveTo(ax,by+bh);
+      xs.forEach((x,i)=>{ g.lineTo(X(x),by+bh-i/n*bh); g.lineTo(X(x),by+bh-(i+1)/n*bh); }); g.lineTo(ax+aw,by); g.stroke();
+      U.text(g,'F*(x)',ax+6,by+12,{size:12,color:c.soft});
+      const m = xs.reduce((a,b)=>a+b,0)/n, Dv = xs.reduce((s,x)=>s+(x-m)**2,0)/n, s = Math.sqrt(Dv);
+      const m3 = xs.reduce((a,x)=>a+(x-m)**3,0)/n, m4 = xs.reduce((a,x)=>a+(x-m)**4,0)/n;
+      const med = n%2 ? xs[(n-1)/2] : (xs[n/2-1]+xs[n/2])/2, mode = lo+(cnt.indexOf(Math.max(...cnt))+.5)*bw;
+      out.innerHTML = `x̄ = <b>${R(m,3)}</b> · D<sub>в</sub> = ${R(Dv,3)} · s² = ${R(Dv*n/(n-1),3)} · σ = ${R(s,3)}<br>медиана = ${R(med,3)} · мода ≈ ${R(mode,2)} · aₛ = <span class="hot">${R(m3/s**3,2)}</span> · eₖ = ${R(m4/s**4-3,2)}`;
+    }
+    gen();
+    return draw;
+  }
+});
+
+/* 15. Корреляция и регрессия по выборке */
+add({
+  id:'tv15', title:'Корреляция и регрессия по выборке', src:'Гмурман, гл. 12',
+  theory:`<p>Зависимость бывает <b>функциональной</b> (каждому x — одно y) и <b>статистической</b> (при изменении x меняется распределение Y). Если меняется условное среднее ȳₓ, связь называют <b>корреляционной</b>, а ȳₓ = f(x) — <b>уравнением регрессии</b> Y на X.</p>
+  <h3>Метод наименьших квадратов</h3>
+  <p>Прямую y = kx + b подбирают так, чтобы сумма квадратов отклонений Σ(yᵢ − kxᵢ − b)² была наименьшей:</p>
+  <div class="f">k = ${fr('nΣxy − Σx·Σy','nΣx² − (Σx)²')}, &nbsp; b = ${fr('Σy − kΣx','n')}</div>
+  <h3>Выборочный коэффициент корреляции</h3>
+  <div class="f">r<sub>в</sub> = ${fr('Σnₓᵧxy − n·x̄·ȳ','n·σₓ·σᵧ')}, &nbsp; ȳₓ − ȳ = r<sub>в</sub>${fr('σᵧ','σₓ')}(x − x̄)<small>r<sub>в</sub> ${'σ'}ᵧ/σₓ — выборочный коэффициент регрессии Y на X. Аналогично x̄ᵧ − x̄ = r<sub>в</sub>(σₓ/σᵧ)(y − ȳ)</small></div>
+  <p>Чем ближе |r<sub>в</sub>| к 1, тем теснее линейная связь. Значимость проверяют критерием T = r<sub>в</sub>√(n − 2)/√(1 − r<sub>в</sub>²) с k = n − 2 степенями свободы. Для <b>криволинейной</b> связи используют параболическую регрессию y = ax² + bx + c и корреляционное отношение η.</p>
+  <h3>Ранговая корреляция</h3>
+  <div class="f">ρ<sub>в</sub> = 1 − ${fr('6Σd²','n(n² − 1)')}, &nbsp; τ<sub>в</sub> = ${fr('4R','n(n − 1)')} − 1<small>Спирмен: d — разность рангов объекта; Кендалл: R — сумма чисел рангов, больших данного и стоящих правее него. Оба лежат в [−1; 1]</small></div>`,
+  predict:{q:'Когда прямые регрессии Y на X и X на Y совпадают?', opts:['Всегда','Только при |r| = 1','Когда r = 0'], a:1,
+    why:'Угол между прямыми тем меньше, чем больше |r|. При |r| = 1 связь строго линейная, и прямые сливаются. При r = 0 они перпендикулярны осям и друг другу.'},
+  flap:`<p><b>Задача 542 (Спирмен).</b> Правильные ранги 1…13, испытуемый дал 6, 3, 4, 2, 1, 10, 7, 8, 9, 5, 11, 13, 12. Разности d: −5, −1, −1, 2, 4, −4, 0, 0, 0, 5, 0, −1, 1; Σd² = 90.</p>
+  <p>ρ = 1 − 6·90/(13·168) = 1 − 540/2184 ≈ <b>0,75</b>.</p>
+  <p><b>Кендалл</b> для тех же данных (задача 550): R = 60, τ = 4·60/(13·12) − 1 ≈ 0,54.</p>`,
+  figCap:'Щёлкни по полю, чтобы добавить точку. Прямая — метод наименьших квадратов, её уравнение и r пересчитываются сразу.',
+  try:'Поставь одну точку далеко от остальных — посмотри, как сильно один выброс тянет прямую.',
+  ch:{q:'Задача 542. Правильные ранги 1, 2, …, 13; ранги испытуемого: 6, 3, 4, 2, 1, 10, 7, 8, 9, 5, 11, 13, 12. Найдите коэффициент ранговой корреляции Спирмена.', check:s=>U.near(s,0.7527,0.006), ans:'≈ 0,75', hint:'Найди Σd², затем ρ = 1 − 6Σd²/(n(n² − 1)), n = 13.'},
+  fig(el){
+    const preset = [[1,2.1],[2,2.9],[3,3.2],[4,4.8],[5,5.1],[6,6.3],[7,6.8],[8,8.4],[9,8.9],[10,10.2]];
+    let pts = preset.map(p=>[...p]);
+    el.append(h('div',{class:'row'}, U.btn('Пример', ()=>{ pts = preset.map(p=>[...p]); draw(); }), U.btn('Очистить', ()=>{ pts = []; draw(); }), U.btn('Убрать последнюю', ()=>{ pts.pop(); draw(); })));
+    const cv = U.canvas(el, .7), out = h('div',{class:'readout'}); el.append(out);
+    const V = 12, ax = 30, pad = 10;
+    cv.cv.style.cursor = 'crosshair';
+    cv.cv.addEventListener('click', e => { const rc = cv.cv.getBoundingClientRect(), W = rc.width, H = rc.height;
+      const x = (e.clientX-rc.left-ax)/(W-ax-pad)*V, y = (H-24-(e.clientY-rc.top))/(H-24-pad)*V; if (x>=0&&y>=0&&x<=V&&y<=V){ pts.push([x,y]); draw(); } });
+    function draw(){
+      const {g,W,H} = cv.fit(), c = U.col(), X = x => ax+x/V*(W-ax-pad), Y = y => H-24-y/V*(H-24-pad);
+      U.axes(g,ax,H-24,W-pad,pad,c);
+      for (let v=0;v<=V;v+=2){ U.text(g,v,X(v),H-10,{size:10,align:'center',color:c.soft,kind:'mono'}); U.text(g,v,ax-6,Y(v)+4,{size:10,align:'right',color:c.soft,kind:'mono'}); }
+      pts.forEach(([x,y])=>{ g.fillStyle=c.stamp; g.beginPath(); g.arc(X(x),Y(y),4.5,0,7); g.fill(); });
+      const n = pts.length;
+      if (n < 2){ out.innerHTML = 'Добавь хотя бы две точки щелчком по полю.'; return; }
+      const sx = pts.reduce((s,p)=>s+p[0],0), sy = pts.reduce((s,p)=>s+p[1],0), sxy = pts.reduce((s,p)=>s+p[0]*p[1],0), sxx = pts.reduce((s,p)=>s+p[0]*p[0],0), syy = pts.reduce((s,p)=>s+p[1]*p[1],0);
+      const den = n*sxx - sx*sx; if (!den){ out.innerHTML = 'Все точки на одной вертикали — прямую не провести.'; return; }
+      const k = (n*sxy - sx*sy)/den, b = (sy - k*sx)/n, r = (n*sxy - sx*sy)/Math.sqrt(den*(n*syy - sy*sy) || 1);
+      g.save(); g.shadowColor = c.glow; g.shadowBlur = 8; g.strokeStyle = c.pen; g.lineWidth = 2.5; g.beginPath(); g.moveTo(X(0),Y(b)); g.lineTo(X(V),Y(k*V+b)); g.stroke(); g.restore();
+      pts.forEach(([x,y])=>{ g.strokeStyle = c.soft; g.setLineDash([2,3]); g.beginPath(); g.moveTo(X(x),Y(y)); g.lineTo(X(x),Y(k*x+b)); g.stroke(); g.setLineDash([]); });
+      out.innerHTML = `n = ${n} · y = <b>${R(k,3)}x ${b<0?'−':'+'} ${R(Math.abs(b),3)}</b> · r = <span class="hot">${R(r,3)}</span>${n>2&&Math.abs(r)<1?` · T = ${R(r*Math.sqrt(n-2)/Math.sqrt(1-r*r),2)}`:''}`;
+    }
+    return draw;
+  }
+});
+
+/* 16. Сравнение средних и дисперсий */
+add({
+  id:'tv16', title:'Сравнение средних и дисперсий', src:'Гмурман, гл. 13 §2–8',
+  theory:`<p>Порядок проверки любой гипотезы: 1) сформулировать H₀ и H₁; 2) выбрать уровень значимости α; 3) вычислить наблюдаемое значение критерия; 4) по таблице найти критическую точку; 5) сравнить.</p>
+  <p>Вид критической области задаёт H₁: при H₁: a ≠ a₀ — <b>двусторонняя</b>, Φ(u<sub>кр</sub>) = (1 − α)/2; при H₁: a &gt; a₀ — <b>правосторонняя</b>, Φ(u<sub>кр</sub>) = (1 − 2α)/2. При α = 0,05 это 1,96 и 1,645.</p>
+  <h3>Две дисперсии — критерий Фишера — Снедекора</h3>
+  <div class="f">F = ${fr('s²<sub>б</sub>','s²<sub>м</sub>')}, &nbsp; k₁ = n₁ − 1, k₂ = n₂ − 1<small>большая исправленная дисперсия делится на меньшую; при F &lt; F<sub>кр</sub>(α; k₁; k₂) различие незначимо</small></div>
+  <h3>Две средние</h3>
+  <div class="f">Z = ${fr('x̄ − ȳ','√(D(X)/n + D(Y)/m)')}<small>генеральные дисперсии известны (или выборки большие, тогда вместо D берут s²)</small></div>
+  <div class="f">T = ${fr('x̄ − ȳ','√[((n−1)sₓ² + (m−1)sᵧ²)/(n+m−2)] · √(1/n + 1/m)')}, &nbsp; k = n + m − 2<small>малые выборки, дисперсии неизвестны, но равны (сначала проверяют это по F)</small></div>
+  <h3>Средняя и гипотетическое значение a₀</h3>
+  <div class="f">U = ${fr('(x̄ − a₀)√n','σ')} &nbsp; (σ известна), &nbsp; T = ${fr('(x̄ − a₀)√n','s')}, k = n − 1</div>
+  <h3>Частота и вероятность p₀</h3>
+  <div class="f">U = ${fr('(m/n − p₀)√n','√(p₀q₀)')}</div>
+  <p>Исправленная дисперсия и гипотетическая σ₀²: χ² = (n − 1)s²/σ₀² с k = n − 1 (глава 15).</p>`,
+  predict:{q:'Нужна двусторонняя критическая область, α = 0,05. Чему равно u<sub>кр</sub>?', opts:['1,645','1,96','2,58'], a:1,
+    why:'Φ(u<sub>кр</sub>) = (1 − 0,05)/2 = 0,475 → u<sub>кр</sub> = 1,96. Число 1,645 — для односторонней области, 2,58 — для двусторонней при α = 0,01.'},
+  flap:`<p><b>Задача 569.</b> n = m = 50, x̄ = 20,1, ȳ = 19,8, D(X) = 1,750, D(Y) = 1,375. Z = 0,3/√(0,035 + 0,0275) = 0,3/0,25 = <b>1,2</b>.</p>
+  <p>H₁: M(X) ≠ M(Y) — область двусторонняя, z<sub>кр</sub> = 1,96. |1,2| &lt; 1,96 — нет оснований отвергнуть H₀: средние различаются незначимо.</p>`,
+  figCap:'Распределение критерия при верной H₀. Заштрихована критическая область, светится наблюдаемое значение.',
+  try:'Переключи область на правостороннюю: та же Z может перейти из «принять» в «отвергнуть».',
+  ch:{q:'Задача 569. n = m = 50, x̄ = 20,1 мм, ȳ = 19,8 мм, D(X) = 1,750 мм², D(Y) = 1,375 мм². Найдите Z<sub>набл</sub>.', check:s=>U.near(s,1.2,0.005), ans:'1,2 (&lt; 1,96 — средние различаются незначимо)', hint:'Z = (x̄ − ȳ)/√(D(X)/n + D(Y)/m).'},
+  fig(el){
+    let z = 1.2, al = .05, side = 2;
+    const sz = U.slider('tv16-z','Z набл',-4,4,.05,z,v=>R(v,2),v=>{z=v; draw();});
+    const bA = U.select('tv16-a',['α = 0,05','α = 0,01','α = 0,10'], v=>{al=[.05,.01,.1][v]; draw();});
+    const bS = U.select('tv16-s',['двусторонняя (a ≠ a₀)','правосторонняя (a > a₀)','левосторонняя (a < a₀)'], v=>{side=[2,1,-1][v]; draw();});
+    el.append(h('div',{class:'ctls'}, sz), h('div',{class:'row'}, bA, bS));
+    const cv = U.canvas(el, .5), out = h('div',{class:'readout'}); el.append(out);
+    function draw(){
+      const {g,W,H} = cv.fit(), c = U.col();
+      const uk = side===2 ? U.PhiInv((1-al)/2) : U.PhiInv((1-2*al)/2);
+      const X = v => 20+(v+4)/8*(W-40), Y = v => H-24-v/.42*(H-36);
+      const reg = v => side===2 ? Math.abs(v)>uk : side===1 ? v>uk : v<-uk;
+      g.fillStyle = U.hatch(g,c.bad,4); g.beginPath();
+      for (let v=-4; v<=4; v+=.02) if (reg(v)){ g.rect(X(v),Y(U.phi(v)),X(v+.02)-X(v)+.5,Y(0)-Y(U.phi(v))); } g.fill();
+      g.strokeStyle = c.ink; g.lineWidth = 2; g.beginPath(); for (let v=-4; v<=4; v+=.02){ v>-4 ? g.lineTo(X(v),Y(U.phi(v))) : g.moveTo(X(v),Y(U.phi(v))); } g.stroke();
+      g.beginPath(); g.moveTo(X(-4),Y(0)); g.lineTo(X(4),Y(0)); g.stroke();
+      for (let v=-4; v<=4; v++) U.text(g,v,X(v),H-8,{size:10,align:'center',color:c.soft,kind:'mono'});
+      g.save(); g.shadowColor=c.glow; g.shadowBlur=12; g.strokeStyle=c.glow; g.lineWidth=3; g.beginPath(); g.moveTo(X(z),Y(0)); g.lineTo(X(z),Y(.42)); g.stroke(); g.restore();
+      const rej = reg(z);
+      out.innerHTML = `u<sub>кр</sub> = ${side===2?'±':side<0?'−':''}${R(uk,3)} · Z<sub>набл</sub> = <b>${R(z,2)}</b> → ${rej?'<span class="bad">попадает в критическую область — H₀ отвергаем</span>':'<span class="good">вне критической области — нет оснований отвергнуть H₀</span>'}`;
+    }
+    return draw;
+  }
+});
+
+/* 17. Однофакторный дисперсионный анализ */
+add({
+  id:'tv17', title:'Однофакторный дисперсионный анализ', src:'Гмурман, гл. 14',
+  theory:`<p>Фактор F (сорт удобрения, станок, метод обучения) принимает p уровней, на каждом проведено q испытаний. Вопрос: влияет ли фактор на результат, то есть различаются ли <b>групповые средние</b> x̄<sub>гр j</sub> значимо?</p>
+  <div class="f">S<sub>общ</sub> = S<sub>факт</sub> + S<sub>ост</sub><small>S<sub>общ</sub> = Σ(xᵢⱼ − x̄)² — общий разброс; S<sub>факт</sub> = qΣ(x̄<sub>гр j</sub> − x̄)² — разброс между группами (влияние фактора); S<sub>ост</sub> = Σ(xᵢⱼ − x̄<sub>гр j</sub>)² — разброс внутри групп (случайность)</small></div>
+  <div class="f">s²<sub>факт</sub> = ${fr('S<sub>факт</sub>','p − 1')}, &nbsp; s²<sub>ост</sub> = ${fr('S<sub>ост</sub>','p(q − 1)')}, &nbsp; F = ${fr('s²<sub>факт</sub>','s²<sub>ост</sub>')}</div>
+  <p>F сравнивают с F<sub>кр</sub>(α; p − 1; p(q − 1)) по таблице Фишера — Снедекора. Если F &lt; F<sub>кр</sub>, групповые средние различаются незначимо: влияние фактора не доказано.</p>
+  <p>Предполагается, что данные на каждом уровне нормальны с одинаковой дисперсией. Для удобства из всех xᵢⱼ можно вычесть одно число C (условные варианты yᵢⱼ = xᵢⱼ − C) — суммы квадратов не изменятся.</p>
+  <p>При разном числе испытаний qⱼ на уровнях S<sub>факт</sub> = Σ qⱼ(x̄<sub>гр j</sub> − x̄)², а s²<sub>ост</sub> = S<sub>ост</sub>/(n − p).</p>`,
+  predict:{q:'Фактор на самом деле не влияет. Каким обычно получается F<sub>набл</sub>?', opts:['Около 1','Около 0','Очень большим'], a:0,
+    why:'Если фактора нет, s²<sub>факт</sub> и s²<sub>ост</sub> оценивают одну и ту же дисперсию, и их отношение колеблется около 1. Большое F означает, что группы расходятся сильнее, чем позволяет случайность.'},
+  flap:`<p><b>Задача 671.</b> Три уровня по 4 испытания. F₁: 35, 32, 31, 30 (x̄ = 32); F₂: 30, 24, 26, 20 (x̄ = 25); F₃: 21, 22, 34, 31 (x̄ = 27). Общая средняя 28.</p>
+  <p>S<sub>факт</sub> = 4·(4² + 3² + 1²) = 104; S<sub>ост</sub> = 14 + 52 + 126 = 192; S<sub>общ</sub> = 296.</p>
+  <p>s²<sub>факт</sub> = 104/2 = 52; s²<sub>ост</sub> = 192/9 ≈ 21,3; F = 52/21,3 ≈ <b>2,44</b> &lt; F<sub>кр</sub>(0,05; 2; 9) = 4,26 — нет оснований отвергнуть гипотезу о равенстве групповых средних.</p>`,
+  figCap:'Три группы по 4 испытания. Длинные штрихи — групповые средние, пунктир — общая средняя. Внизу — какую часть разброса объясняет фактор.',
+  try:'Нажми «Данные задачи 671», потом двигай «влияние фактора», пока F не перейдёт за 4,26.',
+  ch:{q:'Задача 671. Уровень F₁: 35, 32, 31, 30; F₂: 30, 24, 26, 20; F₃: 21, 22, 34, 31. Найдите F<sub>набл</sub>.', check:s=>U.near(s,2.4375,0.02), ans:'≈ 2,44 (&lt; 4,26 — влияние фактора незначимо)', hint:'s²<sub>факт</sub> = S<sub>факт</sub>/(p − 1), s²<sub>ост</sub> = S<sub>ост</sub>/(p(q − 1)), p = 3, q = 4.'},
+  fig(el){
+    const T671 = [[35,32,31,30],[30,24,26,20],[21,22,34,31]];
+    let data = T671.map(r=>[...r]), eff = 0;
+    const se = U.slider('tv17-e','влияние фактора',0,10,.5,eff,v=>R(v,1),v=>{eff=v; draw();});
+    el.append(h('div',{class:'ctls'}, se), h('div',{class:'row'}, U.btn('Данные задачи 671', ()=>{ data = T671.map(r=>[...r]); eff = 0; se.set(0); draw(); }),
+      U.btn('Случайные данные', ()=>{ data = [0,1,2].map(()=>Array.from({length:4},()=>Math.round(28+4*U.gauss()))); draw(); })));
+    const cv = U.canvas(el, .66), out = h('div',{class:'readout'}); el.append(out);
+    function draw(){
+      const {g,W,H} = cv.fit(), c = U.col();
+      const D = data.map((r,j)=>r.map(x=>x+(j-1)*eff)), p = 3, q = 4, all = D.flat(), gm = all.reduce((a,b)=>a+b,0)/all.length;
+      const means = D.map(r=>r.reduce((a,b)=>a+b,0)/q);
+      const Sf = q*means.reduce((s,m)=>s+(m-gm)**2,0), So = D.reduce((s,r,j)=>s+r.reduce((t,x)=>t+(x-means[j])**2,0),0), F = So ? (Sf/(p-1))/(So/(p*(q-1))) : Infinity;
+      const lo = Math.min(...all)-3, hi = Math.max(...all)+3, top = 10, bot = H*.72, Y = v => bot-(v-lo)/(hi-lo)*(bot-top), cw = (W-60)/3;
+      g.setLineDash([6,4]); g.strokeStyle=c.soft; g.beginPath(); g.moveTo(40,Y(gm)); g.lineTo(W-10,Y(gm)); g.stroke(); g.setLineDash([]);
+      U.text(g,'x̄ = '+R(gm,1),W-12,Y(gm)-5,{size:11,align:'right',color:c.soft,kind:'mono'});
+      D.forEach((r,j)=>{ const cx = 50+cw*j+cw/2;
+        g.strokeStyle=c.pen; g.lineWidth=3; g.beginPath(); g.moveTo(cx-cw*.32,Y(means[j])); g.lineTo(cx+cw*.32,Y(means[j])); g.stroke();
+        r.forEach((x,i)=>{ const px = cx+(i-1.5)*cw*.15; g.strokeStyle=c.soft; g.lineWidth=1; g.beginPath(); g.moveTo(px,Y(x)); g.lineTo(px,Y(means[j])); g.stroke(); g.fillStyle=c.stamp; g.beginPath(); g.arc(px,Y(x),4,0,7); g.fill(); });
+        U.text(g,'F'+(j+1),cx,bot+16,{size:13,align:'center',w:600}); });
+      const by = bot+28, bw = W-60, tot = Sf+So || 1;
+      g.fillStyle = c.pen; g.fillRect(40,by,bw*Sf/tot,14); g.fillStyle = U.hatch(g,c.soft,4); g.fillRect(40+bw*Sf/tot,by,bw*So/tot,14); g.strokeStyle=c.ink; g.strokeRect(40,by,bw,14);
+      U.text(g,`фактор ${R(Sf/tot*100,0)}%`,40,by+30,{size:11,color:c.pen,kind:'mono'}); U.text(g,`случайность ${R(So/tot*100,0)}%`,40+bw,by+30,{size:11,align:'right',color:c.soft,kind:'mono'});
+      out.innerHTML = `S<sub>факт</sub> = ${R(Sf,1)} · S<sub>ост</sub> = ${R(So,1)} · s²<sub>факт</sub> = ${R(Sf/2,2)} · s²<sub>ост</sub> = ${R(So/9,2)}<br>F = <b>${R(F,2)}</b> ${F<4.26?'<span class="good">&lt; 4,26 — влияние фактора незначимо</span>':'<span class="bad">&gt; 4,26 — фактор влияет значимо</span>'}`;
+    }
+    return draw;
+  }
+});
+
+/* 18. Метод Монте-Карло */
+add({
+  id:'tv18', title:'Метод Монте-Карло: моделирование случайных величин', src:'Гмурман, гл. 15',
+  theory:`<p><b>Метод Монте-Карло</b> (метод статистических испытаний): искомую величину представляют как математическое ожидание некоторой случайной величины, разыгрывают её много раз и берут среднее. Нужны <b>случайные числа</b> r, равномерно распределённые на [0; 1).</p>
+  <h3>Разыгрывание дискретной величины</h3>
+  <p>Отрезок [0; 1) делят на части длиной p₁, p₂, …; если r попало в i-ю часть, X = xᵢ. Так же разыгрывают полную группу событий.</p>
+  <h3>Разыгрывание непрерывной величины</h3>
+  <div class="f">F(x) = r, &nbsp; x = F⁻¹(r)<small>метод обратных функций. Для равномерного закона на (a; b): x = a + (b − a)r; для показательного: x = −(ln r)/λ</small></div>
+  <div class="f">x ≈ σ·(r₁ + r₂ + … + r₁₂ − 6) + a<small>приближённое разыгрывание нормального закона N(a; σ): сумма 12 случайных чисел имеет M = 6 и D = 1</small></div>
+  <h3>Вычисление интегралов</h3>
+  <div class="f">∫<sub>a</sub><sup>b</sup> φ(x)dx ≈ (b − a)·${fr('1','n')}Σφ(xᵢ), &nbsp; xᵢ = a + (b − a)rᵢ</div>
+  <p>Погрешность метода убывает как σ/√n: чтобы уменьшить ошибку в 10 раз, испытаний нужно в 100 раз больше. Зато метод не боится многомерных интегралов и сложных систем: им оценивают надёжность схем и работу систем массового обслуживания.</p>`,
+  predict:{q:'Чтобы уменьшить погрешность метода Монте-Карло в 10 раз, испытаний нужно в…', opts:['10 раз больше','100 раз больше','1000 раз больше'], a:1,
+    why:'Погрешность ∼ 1/√n. Уменьшить её в 10 раз — значит увеличить √n в 10 раз, то есть n в 100 раз.'},
+  flap:`<p><b>Задача 680.</b> X: 3, 8, 12, 23 с вероятностями 0,22; 0,12; 0,43; 0,23. Делим [0; 1): [0; 0,22) → 3, [0,22; 0,34) → 8, [0,34; 0,77) → 12, [0,77; 1) → 23.</p>
+  <p>Числа 0,33; 0,18; 0,51; 0,62; 0,32; 0,41; 0,94; 0,15 дают 8, 3, 12, 12, 8, 12, 23, 3.</p>
+  <p><b>Задача 690.</b> X равномерна на (4; 14): x = 4 + 10r. Для r = 0,74; 0,02; 0,94; 0,36 получаем 11,4; 4,2; 13,4; 7,6.</p>`,
+  figCap:'Случайные точки в квадрате. Доля точек под кривой, умноженная на площадь квадрата, оценивает интеграл.',
+  try:'Выбери «четверть круга → π» и увеличивай n: оценка π сходится, но медленно.',
+  ch:{q:'Задача 680. X: 3, 8, 12, 23 с вероятностями 0,22; 0,12; 0,43; 0,23. Какое значение X разыграется по случайному числу r = 0,33?', check:s=>U.near(s,8,0), ans:'8', hint:'Накопленные границы: 0,22; 0,34; 0,77; 1.'},
+  fig(el){
+    let fn = 0, n = 2000, pts = [];
+    const FN = [{n:'четверть круга → π', f:x=>Math.sqrt(1-x*x), k:4, ex:Math.PI, ymax:1}, {n:'∫₀¹ x² dx = 1/3', f:x=>x*x, k:1, ex:1/3, ymax:1}, {n:'∫₀¹ eˣ dx = e − 1', f:x=>Math.exp(x), k:1, ex:Math.E-1, ymax:Math.E}];
+    const gen = () => { pts = Array.from({length:n},()=>[Math.random(),Math.random()]); draw(); };
+    el.append(h('div',{class:'row'}, U.select('tv18-f', FN.map(f=>f.n), v=>{fn=v; draw();}), U.btn('Бросить заново', gen)),
+      h('div',{class:'ctls'}, U.slider('tv18-n','n',100,30000,100,n,null,v=>{n=v; gen();})));
+    const cv = U.canvas(el, w=>w<420?.95:.62), out = h('div',{class:'readout'}); el.append(out);
+    function draw(){
+      if (!pts.length) return;
+      const {g,W,H} = cv.fit(), c = U.col(), F = FN[fn], s = Math.min(W-40, H-30), ox = (W-s)/2, oy = 8;
+      const X = x => ox+x*s, Y = y => oy+s-y/F.ymax*s;
+      let inn = 0; const show = Math.min(pts.length, 4000);
+      pts.forEach(([x,y],i)=>{ const yy = y*F.ymax, ok = yy <= F.f(x); if (ok) inn++; if (i<show){ g.fillStyle = ok ? c.pen : c.soft; g.globalAlpha = ok ? .7 : .35; g.fillRect(X(x)-1,Y(yy)-1,2.2,2.2); } });
+      g.globalAlpha = 1; g.strokeStyle = c.ink; g.lineWidth = 1.4; g.strokeRect(ox,oy,s,s);
+      g.save(); g.shadowColor = c.glow; g.shadowBlur = 8; g.strokeStyle = c.stamp; g.lineWidth = 2.5; g.beginPath();
+      for (let i=0;i<=200;i++){ const x = i/200; i?g.lineTo(X(x),Y(F.f(x))):g.moveTo(X(x),Y(F.f(x))); } g.stroke(); g.restore();
+      const est = inn/pts.length*F.ymax*F.k;
+      out.innerHTML = `под кривой ${inn} из ${pts.length} · оценка = <b>${R(est,4)}</b> · точно ${R(F.ex,4)} · ошибка <span class="hot">${R(Math.abs(est-F.ex),4)}</span> (порядка ${R(F.ymax*F.k/Math.sqrt(pts.length),3)})`;
+    }
+    gen();
+    return draw;
+  }
+});
+
+/* 19. Случайные функции */
+add({
+  id:'tv19', title:'Случайные функции и стационарные процессы', src:'Гмурман, гл. 16–17',
+  theory:`<p><b>Случайная функция</b> X(t) — функция, значение которой при каждом фиксированном t является случайной величиной (<b>сечением</b>). Конкретный вид X(t), полученный в опыте, — <b>реализация</b> (траектория). Если t — время, X(t) называют <b>случайным процессом</b>.</p>
+  <div class="f">mₓ(t) = M[X(t)], &nbsp; Dₓ(t) = D[X(t)], &nbsp; Kₓ(t₁, t₂) = M[(X(t₁) − mₓ(t₁))(X(t₂) − mₓ(t₂))]<small>математическое ожидание — «средняя траектория», корреляционная функция — связь двух сечений; Kₓ(t, t) = Dₓ(t), Kₓ(t₁, t₂) = Kₓ(t₂, t₁)</small></div>
+  <p>Нормированная корреляционная функция ρₓ = Kₓ(t₁, t₂)/(σₓ(t₁)σₓ(t₂)). Прибавление неслучайной функции не меняет Kₓ; при Y(t) = φ(t)X(t) получаем K<sub>Y</sub> = φ(t₁)φ(t₂)Kₓ(t₁, t₂).</p>
+  <p><b>Производная и интеграл:</b> m<sub>X′</sub> = mₓ′(t), K<sub>X′</sub> = ∂²Kₓ/∂t₁∂t₂; m<sub>∫X</sub> = ∫mₓ(s)ds, K<sub>∫X</sub> = ∬Kₓ(s₁, s₂)ds₁ds₂.</p>
+  <h3>Стационарные функции</h3>
+  <div class="f">mₓ = const, &nbsp; Kₓ(t₁, t₂) = kₓ(τ), τ = t₂ − t₁<small>стационарность в широком смысле. kₓ(τ) чётная, |kₓ(τ)| ≤ kₓ(0) = Dₓ</small></div>
+  <p><b>Эргодическая</b> стационарная функция: характеристики можно получить по одной длинной реализации, усредняя по времени. Достаточное условие — kₓ(τ) → 0 при τ → ∞.</p>
+  <h3>Спектральная плотность</h3>
+  <div class="f">sₓ(ω) = ${fr('1','π')}∫₀<sup>∞</sup>kₓ(τ)cos ωτ dτ, &nbsp; kₓ(τ) = ∫₀<sup>∞</sup>sₓ(ω)cos ωτ dω, &nbsp; Dₓ = ∫₀<sup>∞</sup>sₓ(ω)dω<small>теорема Винера — Хинчина: корреляционная функция и спектр — пара преобразований Фурье. При прохождении через линейную систему sᵧ(ω) = |Φ(iω)|²·sₓ(ω)</small></div>`,
+  predict:{q:'X(t) = U·sin t + V·cos t, где U и V некоррелированы, M(U) = M(V) = 0, D(U) = D(V) = D. Стационарна ли X(t)?', opts:['Да','Нет: дисперсия зависит от t','Только при t = 0'], a:0,
+    why:'mₓ = 0, а Kₓ = D(sin t₁ sin t₂ + cos t₁ cos t₂) = D·cos(t₂ − t₁) зависит только от τ. Дисперсия Dₓ(t) = D постоянна. Это задача 835 Гмурмана.'},
+  flap:`<p><b>Задача 759.</b> X(t) = U·eᵗ, M(U) = 5: mₓ(t) = M(U)·eᵗ = 5eᵗ — неслучайный множитель выносится за знак M.</p>
+  <p><b>Задача 761а.</b> X(t) = U·t² + 2t + 1, M(U) = 1: mₓ(t) = t² + 2t + 1 = (t + 1)².</p>
+  <p><b>Задача 835.</b> X(t) = U sin t + V cos t: mₓ = 0, Kₓ = D cos(t₂ − t₁) — функция стационарна.</p>`,
+  figCap:'Десять реализаций случайной функции. Сплошная линия — математическое ожидание mₓ(t), полоса — mₓ ± σₓ.',
+  try:'Сравни стационарную функцию (полоса постоянной ширины) с нестационарной (полоса расширяется).',
+  ch:{q:'Задача 761а. X(t) = U·t² + 2t + 1, где M(U) = 1. Найдите mₓ(2).', check:s=>U.near(s,9,0.001), ans:'9 (mₓ(t) = (t + 1)²)', hint:'mₓ(t) = M(U)·t² + 2t + 1.'},
+  fig(el){
+    let kind = 0, seed = [];
+    const K = [
+      {n:'U sin t + V cos t — стационарна', gen:()=>{ const u=U.gauss(), v=U.gauss(); return t=>u*Math.sin(t)+v*Math.cos(t); }, m:()=>0, s:()=>1, lo:-3.2, hi:3.2},
+      {n:'U t² + 2t + 1 — нестационарна', gen:()=>{ const u=1+.5*U.gauss(); return t=>u*t*t+2*t+1; }, m:t=>(t+1)**2, s:t=>.5*t*t, lo:-2, hi:30},
+      {n:'шум с затухающей корреляцией', gen:()=>{ const pts=[]; let x=U.gauss(); for(let i=0;i<=200;i++){ pts.push(x); x = .9*x + Math.sqrt(1-.81)*U.gauss(); } return t=>pts[Math.round(t/4*200)]; }, m:()=>0, s:()=>1, lo:-3.2, hi:3.2}];
+    const gen = () => { seed = Array.from({length:10},()=>K[kind].gen()); draw(); };
+    el.append(h('div',{class:'row'}, U.select('tv19-k', K.map(k=>k.n), v=>{kind=v; gen();}), U.btn('Новые реализации', gen)));
+    const cv = U.canvas(el, .6), out = h('div',{class:'readout'}); el.append(out);
+    function draw(){
+      if (!seed.length) return;
+      const {g,W,H} = cv.fit(), c = U.col(), k = K[kind], T = 4;
+      const X = t => 34+t/T*(W-44), Y = v => 10+(k.hi-v)/(k.hi-k.lo)*(H-34);
+      U.axes(g,34,H-24,W-10,10,c);
+      g.fillStyle = c.wash; g.beginPath();
+      for (let i=0;i<=100;i++){ const t = i/100*T; g.lineTo(X(t),Y(k.m(t)+k.s(t))); } for (let i=100;i>=0;i--){ const t = i/100*T; g.lineTo(X(t),Y(k.m(t)-k.s(t))); } g.fill();
+      seed.forEach((f,j)=>{ g.strokeStyle = j%2 ? c.stamp : c.soft; g.globalAlpha = .7; g.lineWidth = 1.2; g.beginPath(); for (let i=0;i<=200;i++){ const t = i/200*T; i?g.lineTo(X(t),Y(f(t))):g.moveTo(X(t),Y(f(t))); } g.stroke(); });
+      g.globalAlpha = 1; g.strokeStyle = c.pen; g.lineWidth = 3; g.beginPath(); for (let i=0;i<=100;i++){ const t = i/100*T; i?g.lineTo(X(t),Y(k.m(t))):g.moveTo(X(t),Y(k.m(t))); } g.stroke();
+      for (let t=0;t<=T;t++) U.text(g,'t='+t,X(t),H-8,{size:10,align:'center',color:c.soft,kind:'mono'});
+      out.innerHTML = kind===1 ? 'mₓ(t) = (t + 1)², σₓ(t) растёт как t² — <span class="bad">нестационарна</span>' : kind===0 ? 'mₓ = 0, kₓ(τ) = D·cos τ — <span class="good">стационарна</span> (полоса постоянной ширины)' : 'mₓ = 0, kₓ(τ) ≈ D·e<sup>−α|τ|</sup> — <span class="good">стационарна и эргодична</span>: соседние значения похожи, далёкие независимы';
+    }
+    gen();
+    return draw;
+  }
+});
+
+/* Дополнительные задачи к новым главам (ответы сверены с разделом «Ответы» Гмурмана) */
+const MORE = {
+  tv12: [
+    P(374,'X: значения 3, 6, 10 с вероятностями 0,2; 0,1; 0,7. Составьте закон распределения Y = 2X + 1 и впишите значение, которое Y принимает с вероятностью 0,7.',21,0,'21 (закон Y: 7, 13, 21 с вероятностями 0,2; 0,1; 0,7)','Подставь каждое xᵢ в 2x + 1.'),
+    P(376,'X: значения π/4, π/2, 3π/4 с вероятностями 0,2; 0,7; 0,1. Найдите вероятность того, что Y = sin X примет значение √2/2.',.3,.0005,'0,3 (sin π/4 = sin 3π/4 = √2/2, вероятности складываются)','Два разных x дают одно y.'),
+    P('401а','X: 10, 12, 16 с вероятностями 0,4; 0,1; 0,5; Y: 1, 2 с вероятностями 0,2; 0,8; X и Y независимы. Найдите P(X + Y = 12).',.32,.0005,'0,32','12 = 10 + 2 — единственная пара; P = 0,4·0,8.')],
+  tv13: [
+    P('409а','Двумерная (X, Y): X ∈ {26, 30, 41, 50}; строка Y = 2,3: 0,05; 0,12; 0,08; 0,04; строка Y = 2,7: 0,09; 0,30; 0,11; 0,21. Найдите P(X = 30).',.42,.0005,'0,42','Сумма по столбцу X = 30.'),
+    P('409б','По той же таблице найдите P(Y = 2,7).',.71,.0005,'0,71','Сумма по строке.'),
+    P('422б','По таблице задачи 422 найдите P(Y = 18 | X = 6).',13/28,.003,'13/28 ≈ 0,464','P(X = 6) = 0,10 + 0,05 + 0,13 = 0,28.')],
+  tv14: [
+    P('524а','По той же выборке (варианты 18,6…20,6, частоты 4, 6, 30, 40, 18, 2) найдите выборочную дисперсию.',.169,.0015,'≈ 0,169','D = h²[M*(u²) − (M*(u))²], h = 0,4.'),
+    P('530в','Варианты 12, 14, 16, 18, 20, 22 с частотами 5, 15, 50, 16, 10, 4 (n = 100). Найдите выборочную дисперсию.',4.8684,.006,'≈ 4,87 (x̄ = 16,46)','D = Σnᵢxᵢ²/n − x̄².'),
+    P(526,'Выборка разбита на интервалы длины h = 12, выборочная дисперсия середин интервалов D<sub>в</sub> = 52,4. Найдите дисперсию с поправкой Шеппарда.',40.4,.01,'40,4','D′ = D<sub>в</sub> − h²/12.')],
+  tv15: [
+    P(549,'Два контролёра расположили 10 деталей по качеству. Ранги первого: 1, 2, …, 10; второго: 1, 2, 4, 3, 6, 5, 7, 10, 9, 8. Найдите коэффициент Кендалла.',.7778,.006,'≈ 0,78 — оценки согласуются','R — сумма чисел рангов, больших данного и стоящих правее: 9 + 8 + 6 + 6 + 4 + 4 + 3 + 0 + 0 + 0.'),
+    P(550,'Найдите коэффициент Кендалла по условию задачи 542 (ранги испытуемого 6, 3, 4, 2, 1, 10, 7, 8, 9, 5, 11, 13, 12).',.5385,.006,'≈ 0,54','R = 60, τ = 4R/(n(n − 1)) − 1.')],
+  tv16: [
+    P('575а','σ = 40, n = 64, x̄ = 136,5. Проверяется H₀: a = 130 при H₁: a ≠ 130, α = 0,01. Найдите U<sub>набл</sub>.',1.3,.005,'1,3 &lt; 2,57 — нет оснований отвергнуть H₀','U = (x̄ − a₀)√n/σ.'),
+    P(590,'Вероятность заказа по каталогу 0,08. Разослали 1000 каталогов новой формы, получили 100 заказов. Найдите U<sub>набл</sub> для H₀: p = 0,08 при H₁: p &gt; 0,08.',2.331,.01,'≈ 2,33 &gt; 1,645 — новая форма значимо эффективнее','U = (m/n − p₀)√n/√(p₀q₀).')],
+  tv17: [
+    P('671а','По данным задачи 671 найдите факторную сумму квадратов S<sub>факт</sub>.',104,.01,'104','q·Σ(x̄<sub>гр</sub> − x̄)², общая средняя 28.'),
+    P('671б','По данным задачи 671 найдите остаточную дисперсию s²<sub>ост</sub>.',192/9,.02,'≈ 21,3 (S<sub>ост</sub> = 192)','S<sub>ост</sub>/(p(q − 1)) = S<sub>ост</sub>/9.')],
+  tv18: [
+    P('690а','X равномерна на (4; 14). Разыграйте значение X по случайному числу r = 0,74.',11.4,.005,'11,4','x = a + (b − a)r.'),
+    P('690б','То же для r = 0,02.',4.2,.005,'4,2','x = 4 + 10r.'),
+    P('696','По формуле задачи 696 (показательный закон, x = −(ln r)/λ) разыграйте значение при λ = 0,1 и r = 0,1.',23.026,.02,'≈ 23,03','ln 0,1 ≈ −2,3026.')],
+  tv19: [
+    P(759,'X(t) = U·eᵗ, M(U) = 5. Найдите mₓ(1).',5*Math.E,.01,'5e ≈ 13,59','Неслучайный множитель выносится за знак M.'),
+    P(835,'X(t) = U sin t + V cos t, U и V некоррелированы, M = 0, D(U) = D(V) = 4. Найдите Dₓ(t).',4,.001,'4 — не зависит от t, функция стационарна','Kₓ(t, t) = D·cos 0.')]
+};
+for (const L of BOOKS.tv.lessons) if (MORE[L.id]) L.more = MORE[L.id];
+
+/* Истории для новых глав */
+const HOOK = {
+  tv12:{eye:'Ловушка среднего', title:'Средняя сторона 1, а средняя площадь — нет', html:`<p>Сторона квадрата случайна и равномерно распределена от 0 до 2. Средняя сторона равна 1. Какова средняя площадь? Хочется сказать «1». Но</p><p class="big">M(X²) = 4/3</p><p>Среднее от функции не равно функции от среднего. На этой ошибке «проваливаются» прогнозы спроса, расчёты рисков и даже оценки времени в пути. Эта глава учит считать правильно.</p>`},
+  tv13:{eye:'New England Journal of Medicine, 2012', title:'Шоколад и Нобелевские премии', html:`<p>Франц Мессерли сопоставил потребление шоколада в странах с числом нобелевских лауреатов на душу населения и получил коэффициент корреляции</p><p class="big">r ≈ 0,79</p><p>Статья была шуточной: чем богаче страна, тем больше в ней и шоколада, и науки. Корреляция показывает связь, но не причину. Эта глава — о том, что r умеет и чего не умеет.</p>`},
+  tv14:{eye:'США, 1936 год', title:'Два миллиона ответов против пятидесяти тысяч', html:`<p>Журнал Literary Digest разослал анкеты и получил около 2,4 миллиона ответов: победит Лэндон. Джордж Гэллап опросил примерно 50 тысяч человек, но подобранных по правилам, и предсказал победу Рузвельта.</p><p class="big">Победил Рузвельт</p><p>Журнал опрашивал своих подписчиков и владельцев телефонов — людей заметно богаче среднего. Важна не величина выборки, а её репрезентативность.</p>`},
+  tv15:{eye:'Фрэнсис Гальтон, 1886', title:'Откуда взялось слово «регрессия»', html:`<p>Гальтон сравнил рост родителей и взрослых детей. У очень высоких родителей дети в среднем оказывались ниже них, у очень низких — выше.</p><p class="big">«Регрессия к середине»</p><p>Гальтон назвал это возвратом, по-английски regression. Слово закрепилось за всей теорией: уравнение регрессии — это то, как в среднем меняется Y вслед за X.</p>`},
+  tv16:{eye:'Рональд Фишер, 1935', title:'Леди, пробующая чай', html:`<p>Одна дама утверждала, что по вкусу отличает, что налили в чашку первым — чай или молоко. Фишер предложил опыт: 8 чашек, в 4 сначала молоко, в 4 — чай, порядок случайный. Угадать всё случайно можно с вероятностью</p><p class="big">1/C₈⁴ = 1/70</p><p>Из этого спора выросли проверка гипотез и уровень значимости. Говорят, дама угадала все чашки.</p>`},
+  tv17:{eye:'Опытная станция Ротамстед, 1920-е', title:'Удобрения, на которых вырос дисперсионный анализ', html:`<p>Фишер работал в Ротамстеде и разбирал данные многолетних опытов с удобрениями. Урожай менялся и от удобрения, и от погоды, и от участка поля. Как отделить влияние удобрения от случайного разброса?</p><p class="big">S<sub>общ</sub> = S<sub>факт</sub> + S<sub>ост</sub></p><p>Фишер разложил общий разброс на части. Так появился дисперсионный анализ, а F-критерий назван в его честь.</p>`},
+  tv18:{eye:'Станислав Улам, 1946', title:'Пасьянс, из которого вырос метод Монте-Карло', html:`<p>Математик Улам выздоравливал после болезни и раскладывал пасьянс. Посчитать шанс его сойтись формулами оказалось почти невозможно. Тогда он подумал: проще разложить сто раз и посчитать, сколько раз сошлось.</p><p class="big">Моделирование вместо формул</p><p>Вместе с фон Нейманом Улам применил идею к расчётам для атомного проекта. Метод назвали в честь казино в Монако, где правит случай.</p>`},
+  tv19:{eye:'Александр Хинчин, 1934', title:'Как связаны шум и спектр', html:`<p>Советский математик Хинчин доказал: у стационарного процесса корреляционная функция и спектральная плотность — пара преобразований Фурье. Норберт Винер пришёл к похожему результату раньше для отдельных функций.</p><p class="big">теорема Винера — Хинчина</p><p>На ней стоят радиосвязь, обработка звука и фильтры шума. Корреляционная функция говорит, «как долго процесс помнит себя», спектр — «на каких частотах он шумит».</p>`}
+};
+for (const L of BOOKS.tv.lessons) if (HOOK[L.id]) L.hook = HOOK[L.id];
+
+/* Итоги глав и вопросы к экзамену */
+const SUM = {
+  tv1:['P(A) = m/n — только для конечного числа <b>равновозможных</b> несовместных исходов, образующих полную группу.','Относительная частота W = m/n меняется от серии к серии, но при больших n устойчиво держится около P(A).','Событие достоверное: P = 1, невозможное: P = 0, случайное: 0 &lt; P &lt; 1.','Порядок важен — размещения Aₙᵐ, не важен — сочетания Cₙᵐ, все элементы переставляются — Pₙ = n!.','Главная ошибка — считать равновозможными неравновозможные исходы (задача 4).'],
+  tv2:['P = mes g / mes G: длина, площадь или объём благоприятной области к всей.','Точку «бросают наудачу»: вероятность попасть в область пропорциональна её мере и не зависит от формы.','Задача о встрече: P = 1 − (1 − t/T)².','Задачи с двумя моментами времени сводятся к точке в квадрате, с тремя — в кубе.'],
+  tv3:['Несовместные: P(A + B) = P(A) + P(B); совместные: минус P(AB).','P(AB) = P(A)·P<sub>A</sub>(B); для независимых P(AB) = P(A)·P(B).','Хотя бы одно из n: 1 − q₁q₂…qₙ; при равных p: 1 − qⁿ.','Сколько опытов, чтобы P ≥ γ: n ≥ ln(1 − γ)/ln q.','Ровно одно — сумма вариантов вида p₁q₂q₃.'],
+  tv4:['Гипотезы B₁…Bₙ образуют полную группу: ΣP(Bᵢ) = 1.','Полная вероятность: P(A) = Σ P(Bᵢ)·P<sub>Bᵢ</sub>(A).','Бейес: P<sub>A</sub>(Bᵢ) = P(Bᵢ)P<sub>Bᵢ</sub>(A)/P(A) — переоценка гипотез после опыта.','Редкая гипотеза остаётся маловероятной даже после «точного» теста.'],
+  tv5:['Pₙ(k) = Cₙᵏpᵏqⁿ⁻ᵏ — n независимых испытаний с постоянной p.','Наивероятнейшее число: np − q ≤ k₀ ≤ np + p; если границы целые, k₀ два.','M = np, D = npq для числа появлений.','Не менее k раз — сумма от k до n или 1 минус сумма от 0 до k − 1.'],
+  tv6:['Локальная теорема Лапласа: Pₙ(k) ≈ φ(x)/√(npq), x = (k − np)/√(npq).','Интегральная: Pₙ(k₁, k₂) ≈ Φ(x″) − Φ(x′); Φ нечётна, Φ(x) ≈ 0,5 при x &gt; 5.','Пуассон для редких событий: Pₙ(k) ≈ λᵏe⁻ᵏ/k!, λ = np.','Отклонение частоты: P(|m/n − p| ≤ ε) ≈ 2Φ(ε√(n/(pq))).','Простейший (пуассоновский) поток: Pₜ(k) = (λt)ᵏe<sup>−λt</sup>/k!, λ — интенсивность.'],
+  tv7:['M(X) = Σxᵢpᵢ, D(X) = M(X²) − M²(X), σ = √D.','M(CX) = CM(X), D(CX) = C²D(X), D(C) = 0.','Для независимых: M(XY) = M(X)M(Y), D(X ± Y) = D(X) + D(Y).','Биномиальный: np и npq; Пуассона: λ и λ; геометрический: 1/p и q/p².','Начальные моменты νₖ = M(Xᵏ), центральные μₖ = M[(X − M(X))ᵏ]; μ₂ = D.'],
+  tv8:['F(x) = P(X &lt; x): неубывающая, от 0 до 1; f(x) = F′(x) ≥ 0, ∫f = 1.','P(α &lt; X &lt; β) = F(β) − F(α) = ∫f; для непрерывной P(X = a) = 0.','Равномерный: (a + b)/2 и (b − a)²/12; показательный: 1/λ и 1/λ²; нормальный: a и σ².','P(|X − a| &lt; δ) = 2Φ(δ/σ); правило трёх сигм: 0,9973.','Функция надёжности R(t) = e<sup>−λt</sup> — вероятность проработать без отказа время t.','Мода — точка максимума f, медиана — точка, где F = 1/2.'],
+  tv9:['Чебышев: P(|X − M| &lt; ε) ≥ 1 − D/ε² — для любого закона, оценка снизу.','Теорема Чебышева: среднее арифметическое сходится по вероятности к среднему мат. ожиданий.','Теорема Бернулли: m/n → p по вероятности.','Для среднего n независимых: D(X̄) = D/n.'],
+  tv10:['Точечные оценки: x̄ для a, D<sub>в</sub> (смещённая) и s² = nD<sub>в</sub>/(n − 1) (несмещённая) для σ².','Свойства оценок: несмещённость, состоятельность, эффективность.','Метод моментов: приравнять теоретические моменты эмпирическим; МНП: максимизировать функцию правдоподобия.','Интервал для a при известном σ: x̄ ± tσ/√n, 2Φ(t) = γ.','При неизвестном σ: x̄ ± t<sub>γ</sub>s/√n, t<sub>γ</sub> по таблице Стьюдента (k = n − 1).','Интервал шире при большей γ и меньшем n.'],
+  tv11:['H₀ — проверяемая гипотеза, H₁ — конкурирующая; α — вероятность ошибки первого рода.','Ошибка I рода — отвергнуть верную H₀; II рода — принять неверную.','Пирсон: χ² = Σ(nᵢ − nᵢ′)²/nᵢ′, k = s − 1 − r.','χ²<sub>набл</sub> &lt; χ²<sub>кр</sub> — нет оснований отвергнуть H₀.','Для нормального закона r = 2, для Пуассона и показательного r = 1.'],
+  tv12:['Дискретная Y = φ(X): yᵢ = φ(xᵢ) с теми же pᵢ, совпадающие значения складывают.','Монотонная φ: g(y) = f(ψ(y))|ψ′(y)|.','M[φ(X)] = Σφ(xᵢ)pᵢ = ∫φ(x)f(x)dx; в общем случае ≠ φ(M(X)).','Сумма независимых — композиция (свёртка) законов.'],
+  tv13:['Законы составляющих — суммы таблицы по строкам и столбцам.','Условный закон: P(xᵢ | yⱼ) = pᵢⱼ/P(yⱼ).','Независимость: pᵢⱼ = P(xᵢ)P(yⱼ) для всех клеток.','μₓᵧ = M(XY) − M(X)M(Y), r = μₓᵧ/(σₓσᵧ), |r| ≤ 1.','Независимые ⇒ некоррелированы; обратное верно для нормальной системы.'],
+  tv14:['Выборка должна быть репрезентативной.','F*(x) = nₓ/n — ступенчатая, оценивает F(x).','Полигон — ломаная (xᵢ, nᵢ); гистограмма — столбики nᵢ/h площадью n.','Метод произведений: uᵢ = (xᵢ − C)/h, x̄ = hM*(u) + C, D = h²(M*(u²) − M*²(u)).','Асимметрия aₛ = m₃/σ³, эксцесс eₖ = m₄/σ⁴ − 3; поправка Шеппарда D − h²/12.'],
+  tv15:['МНК: k = (nΣxy − ΣxΣy)/(nΣx² − (Σx)²), b = (Σy − kΣx)/n.','ȳₓ − ȳ = r<sub>в</sub>(σᵧ/σₓ)(x − x̄).','Значимость r: T = r√(n − 2)/√(1 − r²), k = n − 2.','Спирмен: ρ = 1 − 6Σd²/(n(n² − 1)); Кендалл: τ = 4R/(n(n − 1)) − 1.'],
+  tv16:['Две дисперсии: F = s²<sub>б</sub>/s²<sub>м</sub>.','Две средние при известных D: Z = (x̄ − ȳ)/√(Dₓ/n + Dᵧ/m).','Малые выборки: T с k = n + m − 2.','Средняя и a₀: U = (x̄ − a₀)√n/σ или T = (x̄ − a₀)√n/s.','Двусторонняя область: Φ(u) = (1 − α)/2; односторонняя: Φ(u) = (1 − 2α)/2.'],
+  tv17:['S<sub>общ</sub> = S<sub>факт</sub> + S<sub>ост</sub>.','s²<sub>факт</sub> = S<sub>факт</sub>/(p − 1), s²<sub>ост</sub> = S<sub>ост</sub>/(p(q − 1)).','F = s²<sub>факт</sub>/s²<sub>ост</sub> сравнивают с F<sub>кр</sub>(α; p − 1; p(q − 1)).','Вычитание константы C из всех данных суммы квадратов не меняет.'],
+  tv18:['Дискретная: [0; 1) делят на части длиной pᵢ.','Непрерывная: x = F⁻¹(r); показательная: x = −(ln r)/λ.','Нормальная: σ(Σ₁¹²rᵢ − 6) + a.','Интеграл: (b − a)·среднее φ(xᵢ); погрешность ∼ 1/√n.'],
+  tv19:['mₓ(t), Dₓ(t), Kₓ(t₁, t₂); Kₓ(t, t) = Dₓ(t).','Неслучайное слагаемое не меняет K; множитель φ(t) даёт φ(t₁)φ(t₂)K.','Стационарность: m = const, K = k(τ); k(0) = D, k чётная.','Эргодичность — характеристики по одной реализации.','sₓ(ω) и kₓ(τ) — пара Фурье (Винер — Хинчин); D = ∫sₓ(ω)dω.']
+};
+const QS = {
+  tv1:[['Сформулируйте классическое определение вероятности и его условия.','P(A) = m/n, где m — число благоприятных исходов, n — всех. Исходы должны быть несовместны, равновозможны и образовывать полную группу.'],['Чем статистическое определение отличается от классического?','Статистическое берёт за вероятность относительную частоту в длинной серии опытов; оно не требует равновозможности, но даёт лишь приближённое значение.'],['Что такое полная группа событий?','Набор событий, из которых в результате опыта обязательно наступит хотя бы одно; если они ещё и попарно несовместны — наступит ровно одно.']],
+  tv2:[['Дайте определение геометрической вероятности.','P = mes g/mes G — отношение меры (длины, площади, объёма) благоприятной области к мере всей области; точка бросается наудачу.'],['Как решается задача о встрече?','Моменты прихода — точка (x, y) в квадрате T×T; встреча при |x − y| ≤ t; P = 1 − (1 − t/T)².']],
+  tv3:[['Сформулируйте теорему сложения для совместных событий.','P(A + B) = P(A) + P(B) − P(AB).'],['Что такое условная вероятность?','P<sub>A</sub>(B) = P(AB)/P(A) — вероятность B, вычисленная в предположении, что A уже наступило.'],['Как найти вероятность хотя бы одного из n независимых событий?','P = 1 − q₁q₂…qₙ, где qᵢ = 1 − pᵢ.']],
+  tv4:[['Запишите формулу полной вероятности.','P(A) = Σ P(Bᵢ)·P<sub>Bᵢ</sub>(A), где Bᵢ — полная группа несовместных гипотез.'],['Когда применяют формулу Бейеса?','Когда опыт уже произведён и событие A наступило: она пересчитывает вероятности гипотез, P<sub>A</sub>(Bᵢ) = P(Bᵢ)P<sub>Bᵢ</sub>(A)/P(A).']],
+  tv5:[['Запишите формулу Бернулли и условия её применения.','Pₙ(k) = Cₙᵏpᵏqⁿ⁻ᵏ; n независимых испытаний, в каждом событие наступает с одной и той же вероятностью p.'],['Как найти наивероятнейшее число появлений?','Из неравенства np − q ≤ k₀ ≤ np + p.']],
+  tv6:[['Когда используют теоремы Лапласа, а когда формулу Пуассона?','Лапласа — при большом n и npq не слишком малом (практически &gt; 9); Пуассона — при большом n и малом p (λ = np ≤ 10).'],['Перечислите свойства функции Лапласа Φ(x).','Нечётная: Φ(−x) = −Φ(x); Φ(0) = 0; возрастает; Φ(x) → 0,5 при x → ∞ (практически Φ(x) = 0,5 при x &gt; 5).'],['Что такое простейший поток событий?','Стационарный, без последействия и ординарный поток; число событий за время t распределено по Пуассону с параметром λt.']],
+  tv7:[['Дайте определение и перечислите свойства математического ожидания.','M(X) = Σxᵢpᵢ. M(C) = C, M(CX) = CM(X), M(X + Y) = M(X) + M(Y), для независимых M(XY) = M(X)M(Y).'],['Как вычислить дисперсию и что она характеризует?','D(X) = M(X²) − M²(X); характеризует рассеяние значений вокруг M(X).'],['Чему равны M и D биномиального закона?','M = np, D = npq.']],
+  tv8:[['Перечислите свойства функции распределения.','0 ≤ F ≤ 1; неубывающая; F(−∞) = 0, F(+∞) = 1; P(a ≤ X &lt; b) = F(b) − F(a); для непрерывной X непрерывна.'],['Сформулируйте правило трёх сигм.','Для нормального закона практически достоверно, что |X − a| &lt; 3σ: вероятность 0,9973.'],['Чем характерен показательный закон?','f = λe<sup>−λx</sup> при x ≥ 0, M = σ = 1/λ; описывает время безотказной работы; R(t) = e<sup>−λt</sup>.']],
+  tv9:[['Сформулируйте неравенство Чебышева.','P(|X − M(X)| &lt; ε) ≥ 1 − D(X)/ε² для любого ε &gt; 0.'],['В чём смысл закона больших чисел?','Среднее большого числа случайных величин теряет случайность и почти не отличается от среднего их мат. ожиданий (теоремы Чебышева и Бернулли).']],
+  tv10:[['Какие требования предъявляют к статистическим оценкам?','Несмещённость (M оценки равно параметру), состоятельность (сходится к параметру при n → ∞), эффективность (наименьшая дисперсия).'],['Почему вводят исправленную дисперсию?','D<sub>в</sub> — смещённая оценка; s² = nD<sub>в</sub>/(n − 1) несмещённая.'],['Что означает надёжность γ доверительного интервала?','Доля таких интервалов (при многократном повторении выборок), которые накрывают истинный параметр.']],
+  tv11:[['Что такое уровень значимости?','Вероятность ошибки первого рода — отвергнуть верную нулевую гипотезу; обычно 0,05 или 0,01.'],['Как вычислить число степеней свободы в критерии Пирсона?','k = s − 1 − r: s — число групп, r — число параметров, оценённых по выборке.']],
+  tv12:[['Как найти закон распределения функции дискретной случайной величины?','Вычислить yᵢ = φ(xᵢ), сохранить вероятности pᵢ, одинаковые значения y объединить, сложив их вероятности.'],['Как найти плотность Y = φ(X) для монотонной φ?','g(y) = f(ψ(y))·|ψ′(y)|, где ψ — обратная к φ функция.']],
+  tv13:[['Как найти законы распределения составляющих по таблице двумерной величины?','Сложить вероятности по столбцам (для X) и по строкам (для Y).'],['Что показывает коэффициент корреляции?','Тесноту линейной связи: |r| ≤ 1; |r| = 1 — строгая линейная зависимость; r = 0 — линейной связи нет.'],['Следует ли из некоррелированности независимость?','В общем случае нет; для нормально распределённой системы — да.']],
+  tv14:[['Что такое эмпирическая функция распределения?','F*(x) = nₓ/n, где nₓ — число вариант, меньших x; оценка теоретической F(x).'],['Чем полигон отличается от гистограммы?','Полигон — ломаная по точкам (xᵢ, nᵢ) для дискретного ряда; гистограмма — ступенчатая фигура из прямоугольников высотой nᵢ/h для интервального ряда.'],['В чём суть метода произведений?','Переход к условным вариантам uᵢ = (xᵢ − C)/h упрощает вычисления: x̄ = hM*(u) + C, D = h²(M*(u²) − M*²(u)).']],
+  tv15:[['В чём суть метода наименьших квадратов?','Параметры прямой подбирают так, чтобы сумма квадратов отклонений наблюдаемых y от прямой была минимальной.'],['Запишите выборочное уравнение прямой регрессии Y на X.','ȳₓ − ȳ = r<sub>в</sub>(σᵧ/σₓ)(x − x̄).'],['Когда используют ранговую корреляцию?','Когда признаки не измерить числом, а можно только упорядочить объекты (качество, вкус, оценки экспертов).']],
+  tv16:[['Как выбрать вид критической области?','По конкурирующей гипотезе: H₁: a ≠ a₀ — двусторонняя, a &gt; a₀ — правосторонняя, a &lt; a₀ — левосторонняя.'],['Каким критерием сравнивают две дисперсии нормальных совокупностей?','Критерием Фишера — Снедекора F = s²<sub>б</sub>/s²<sub>м</sub> с k₁ = n₁ − 1, k₂ = n₂ − 1.']],
+  tv17:[['На какие части раскладывается общая сумма квадратов в дисперсионном анализе?','S<sub>общ</sub> = S<sub>факт</sub> (между группами) + S<sub>ост</sub> (внутри групп).'],['Как делается вывод о влиянии фактора?','F = s²<sub>факт</sub>/s²<sub>ост</sub>; если F &gt; F<sub>кр</sub>(α; p − 1; p(q − 1)), групповые средние различаются значимо — фактор влияет.']],
+  tv18:[['Как разыграть непрерывную случайную величину?','Методом обратных функций: решить F(x) = r относительно x.'],['От чего зависит точность метода Монте-Карло?','Погрешность пропорциональна σ/√n: убывает обратно корню из числа испытаний.']],
+  tv19:[['Что такое корреляционная функция случайной функции?','Kₓ(t₁, t₂) = M[(X(t₁) − mₓ(t₁))(X(t₂) − mₓ(t₂))] — корреляционный момент двух сечений.'],['Какая случайная функция называется стационарной?','Если её мат. ожидание постоянно, а корреляционная функция зависит только от разности аргументов τ = t₂ − t₁.'],['Что такое спектральная плотность?','sₓ(ω) — распределение дисперсии стационарного процесса по частотам; с kₓ(τ) связана преобразованием Фурье.']]
+};
+for (const L of BOOKS.tv.lessons){ if (SUM[L.id]) L.sum = SUM[L.id]; if (QS[L.id]) L.qs = QS[L.id]; }
+
+/* Дополнения к теории первых глав (чтобы ничего из программы не потерялось) */
+const L1 = BOOKS.tv.lessons.find(L=>L.id==='tv1');
+L1.theory = `<p><b>Событие</b> — результат испытания. <b>Достоверное</b> наступает всегда (P = 1), <b>невозможное</b> — никогда (P = 0). События <b>несовместны</b>, если не могут наступить вместе; <b>противоположные</b> A и Ā — несовместны и образуют полную группу.</p>
+  <p><b>Сумма</b> A + B — наступило хотя бы одно из них; <b>произведение</b> AB — наступили оба.</p>` + L1.theory.replace('<p><b>Испытание</b>', '<p>Само <b>испытание</b>');
+const L6 = BOOKS.tv.lessons.find(L=>L.id==='tv6');
+L6.theory += `<h3>Простейший поток событий</h3><p>Поток событий (вызовы, отказы, заявки) называют <b>простейшим</b>, если он стационарен, без последействия и ординарен. Число событий за время t распределено по Пуассону:</p>
+  <div class="f">Pₜ(k) = ${fr('(λt)ᵏ e<sup>−λt</sup>','k!')}<small>λ — интенсивность потока, среднее число событий за единицу времени</small></div>`;
+const L7 = BOOKS.tv.lessons.find(L=>L.id==='tv7');
+L7.theory += `<h3>Моменты</h3><div class="f">νₖ = M(Xᵏ), &nbsp; μₖ = M[(X − M(X))ᵏ], &nbsp; μ₂ = D(X), &nbsp; μ₃ = ν₃ − 3ν₁ν₂ + 2ν₁³<small>начальные и центральные теоретические моменты; асимметрия μ₃/σ³, эксцесс μ₄/σ⁴ − 3</small></div>`;
+const L10 = BOOKS.tv.lessons.find(L=>L.id==='tv10');
+L10.theory += `<h3>Как получают оценки</h3><p><b>Метод моментов:</b> теоретические моменты приравнивают эмпирическим и решают относительно параметров (для показательного закона λ* = 1/x̄). <b>Метод наибольшего правдоподобия:</b> выбирают параметр, при котором вероятность получить наблюдённую выборку максимальна; решают уравнение d ln L/dθ = 0.</p>
+  <div class="f">${fr('(n − 1)s²','χ²<sub>2</sub>')} &lt; σ² &lt; ${fr('(n − 1)s²','χ²<sub>1</sub>')} &nbsp;или&nbsp; s(1 − q) &lt; σ &lt; s(1 + q)<small>доверительный интервал для σ нормального закона; q = q(γ, n) — по таблице</small></div>`;
+
+/* Части книги */
+BOOKS.tv.parts = [
+  {t:'Случайные события', ids:['tv1','tv2','tv3','tv4','tv5','tv6']},
+  {t:'Случайные величины', ids:['tv7','tv8','tv12','tv13','tv9']},
+  {t:'Математическая статистика', ids:['tv14','tv10','tv15','tv11','tv16','tv17']},
+  {t:'Моделирование и случайные процессы', ids:['tv18','tv19']}
+];
+})();
+
+</script>
 <script>
 /* ——— движок книги ——— */
 (() => {
 const {h} = U;
 const KEY = 'bit-i-sluchai-v1';
-let S = {book:'tv', i:0, done:{}, pred:{}, solved:{}, exam:'2026-12-25'};
+let S = {book:'tv', i:0, done:{}, pred:{}, solved:{}, exam:'2026-12-25', step:{}, seen:{}};
 try { Object.assign(S, JSON.parse(localStorage.getItem(KEY)||'{}')); } catch(e){}
+// настройки для концентрации: пошаговый режим по умолчанию включён
+S.ui = Object.assign({steps:true, calm:false, big:false, ruler:false, timer:25}, S.ui||{});
+let stepNavApi = null;
+const applyUI = () => { const r = document.documentElement.classList; r.toggle('calm', S.ui.calm); r.toggle('bigtext', S.ui.big); r.toggle('ruler', S.ui.ruler); };
+applyUI();
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
+
 // в сборке может быть одна книга или обе
 const KEYS = Object.keys(BOOKS).filter(k => BOOKS[k].lessons.length);
+const ROMAN = ['I','II','III','IV','V','VI','VII','VIII'];
+// главы раскладываются по частям в порядке, заданном книгой
+for (const k of KEYS){
+  const B = BOOKS[k];
+  if (!B.parts) { B.parts = [{t:B.sub, ids:B.lessons.map(L=>L.id)}]; }
+  const order = B.parts.flatMap(p=>p.ids);
+  B.lessons = order.map(id => B.lessons.find(L=>L.id===id)).filter(Boolean);
+  B.parts.forEach((p,pi) => p.ids.forEach(id => { const L = B.lessons.find(x=>x.id===id); if (L){ L.part = p.t; L.partNo = pi; } }));
+}
 const m = /^#(tv|vms)-(\d+)$/.exec(location.hash);
 if (m && KEYS.includes(m[1])){ S.book = m[1]; S.i = +m[2]; }
 if (!KEYS.includes(S.book)){ S.book = KEYS[0]; S.i = 0; }
 S.i = Math.min(S.i, BOOKS[S.book].lessons.length);
 
 const pL = document.getElementById('pL'), pR = document.getElementById('pR'), leaf = document.getElementById('leaf');
-let draw = null, ro = null;
+let draw = null;
 
 const stampSVG = (n, fresh) => {
   const id = 'arc'+Math.random().toString(36).slice(2,7);
@@ -1283,7 +1948,16 @@ const stampSVG = (n, fresh) => {
     <text font-family="JetBrains Mono, monospace" font-size="9.5" font-weight="600" fill="currentColor" letter-spacing="1.6"><textPath href="#${id}">ЗАЧТЕНО ✦ ГЛАВА ${n} ✦ ЗАЧТЕНО ✦</textPath></text>
     <text x="50" y="60" text-anchor="middle" font-family="Alegreya, serif" font-weight="800" font-size="30" fill="currentColor">${n}</text></svg>`;
 };
+const medalSVG = (lvl) => {
+  const rays = Array.from({length:16},(_,i)=>{ const a=i*Math.PI/8, r1=30, r2=i%2?36:38; return `<line x1="${38+r1*Math.cos(a)}" y1="${38+r1*Math.sin(a)}" x2="${38+r2*Math.cos(a)}" y2="${38+r2*Math.sin(a)}"/>`; }).join('');
+  const stars = Array.from({length:5},(_,i)=>`<text x="${18+i*10}" y="58" font-size="9" text-anchor="middle" fill="${i<=lvl?'var(--foil)':'var(--edge)'}">★</text>`).join('');
+  return `<svg viewBox="0 0 76 76" aria-hidden="true"><g stroke="var(--foil)" stroke-width="2" stroke-linecap="round">${rays}</g>
+    <circle cx="38" cy="38" r="27" fill="var(--paper)" stroke="var(--foil)" stroke-width="2.5"/><circle cx="38" cy="38" r="22" fill="none" stroke="var(--foil)" stroke-width="1"/>
+    <text x="38" y="45" text-anchor="middle" font-family="Alegreya, serif" font-weight="800" font-size="22" fill="var(--ink)">${ROMAN[lvl]}</text>${stars}</svg>`;
+};
+
 const doneCount = k => BOOKS[k].lessons.filter(L => S.done[L.id]).length;
+const solvedCount = L => (L.more||[]).filter((_,j)=>S.solved[L.id+'-'+j]).length;
 const updCounts = () => { for (const k of KEYS){ const e = document.getElementById('cnt-'+k); if (e) e.textContent = `${doneCount(k)}/${BOOKS[k].lessons.length}`; } updRank(); };
 
 /* опыт и ранги: всё считается из сохранённого прогресса */
@@ -1298,6 +1972,8 @@ function updRank(){
   document.getElementById('rank').innerHTML = `<span class="rk-l">Ранг</span> <b>${r.name}</b>
     <span class="rk-bar" role="img" aria-label="${r.x} из ${r.mx} очков опыта"><i style="width:${Math.round(r.x/r.mx*100)}%"></i></span>
     <span class="rk-xp">${r.x} XP${r.next ? ` · до «${r.next}» ${r.need}` : ''}</span>`;
+  const B = BOOKS[S.book];
+  document.getElementById('barProg').style.width = (doneCount(S.book)/B.lessons.length*100)+'%';
 }
 const toasts = document.getElementById('toasts');
 function toast(html, kind){
@@ -1313,49 +1989,129 @@ function gain(why, mutate){
   if (r.i > r0) toast(`<span class="tk">Новый ранг</span><b>${r.name}</b>`, 'rankup');
   updCounts();
 }
+const nextUnstamped = B => { const i = B.lessons.findIndex(L => !S.done[L.id]); return i < 0 ? 1 : i+1; };
+const chips = L => h('span',{class:'chips'}, h('span',{class:'chip-st'+(S.done[L.id]?' on':''),title:S.done[L.id]?'штамп получен':'нет штампа'},'✦'),
+  ...(L.more||[]).map((_,j)=>h('span',{class:'dot'+(S.solved[L.id+'-'+j]?' on':'')})));
 
 function renderCover(B){
-  draw = null;
-  const steps = ['Прочитай теорию и формулу на левой странице.','Предскажи ответ — отметь вариант, пока не проверил.','Проверь на рисунке в тетради: двигай ползунки, бросай кости, щёлкай биты.','Подними клапан — там разбор и решение из учебника.','Реши задачу на штамп. Верный ответ — фиолетовая печать «зачтено».'];
+  draw = null; stepNavApi = null; pR.hidden = false;
+  const r = rankOf(B.key), nTasks = B.lessons.reduce((s,L)=>s+1+(L.more||[]).length,0);
+  const cont = nextUnstamped(B);
+  const steps = ['Включи таймер фокуса на 15–25 минут и убери телефон.','Иди по шагам главы: на экране всегда один короткий кусок и кнопка «Дальше».','Предскажи ответ до проверки — так мозг включается.','Подвигай рисунок в опыте, потом реши задачу на штамп.','Закончи «Итогами» и «Вопросами к экзамену». Опыт поднимает ранг.'];
   const art = h('div',{class:'cover-art'});
   pL.replaceChildren(
     h('div',{class:'runhead'}, h('span',{}, KEYS.length>1 ? 'Книга '+(B.key==='tv'?'первая':'вторая') : 'Интерактивный учебник'), h('span',{},'подготовка к сессии')),
-    h('div',{class:'cover'},
+    h('div',{class:'cover reveal'},
+      h('div',{class:'eyebrow'}, `${B.lessons.length} глав · ${B.parts.length} частей · ${nTasks} задач с проверкой`),
       h('h1',{}, B.name),
       h('p',{class:'sub'}, B.sub),
+      h('div',{class:'rule'}),
+      h('div',{class:'medal'}, h('div',{html:medalSVG(r.i)}),
+        h('div',{}, h('div',{class:'mt'},'Твой ранг'), h('div',{class:'mn2'}, r.name),
+          h('span',{class:'rk-bar'}, h('i',{style:`width:${Math.round(r.x/r.mx*100)}%`})),
+          h('div',{class:'mx'}, `${r.x} из ${r.mx} XP${r.next ? ` · до «${r.next}» ещё ${r.need}` : ' · высший ранг'}`))),
+      h('div',{class:'row'}, U.btn(S.done[B.lessons[0].id] ? `Продолжить: глава ${cont}` : 'Начать с главы 1', ()=>go(B.key,cont,1),'pri'), U.btn('Шпаргалка', openSheet), U.btn('Тренажёр', openQuiz), U.btn('Режим концентрации', openFocus)),
       B.cover ? art : null,
       h('p',{class:'theory'}, B.src+'.'),
       h('h3',{},'Как работать с книгой'),
       h('ol',{class:'steps'}, steps.map(s=>h('li',{},s))),
-      h('p',{class:'theory'}, `За штамп главы — ${XP_STAMP} XP, за каждую дополнительную задачу — ${XP_TASK}, за верное предсказание — ${XP_PRED}. Опыт поднимает ранг: «${B.ranks.join('» → «')}».`)
+      h('p',{class:'theory'}, `За штамп главы — ${XP_STAMP} XP, за каждую дополнительную задачу — ${XP_TASK}, за верное предсказание — ${XP_PRED}. Ранги: «${B.ranks.join('» → «')}».`)
     ),
     h('div',{class:'folio'},'i')
   );
   if (B.cover) draw = B.cover(art) || null;
-  const days = Math.ceil((new Date(S.exam+'T09:00') - new Date())/864e5);
-  const left = KEYS.reduce((s,k)=> s + BOOKS[k].lessons.length - doneCount(k), 0);
-  const weeks = Math.max(1, days/7);
-  const dateIn = h('input',{type:'date',class:'txt',id:'examDate',value:S.exam});
-  dateIn.addEventListener('change', () => { if (dateIn.value){ S.exam = dateIn.value; save(); renderCover(B); } });
+  let n = 0;
   pR.replaceChildren(
-    h('div',{class:'runhead'}, h('span',{},'Оглавление'), h('span',{}, `${doneCount(B.key)} из ${B.lessons.length} штампов`)),
-    h('ul',{class:'toclist'}, B.lessons.map((L,i)=>h('li',{}, h('button',{type:'button',onclick:()=>go(B.key,i+1,1)},
-      h('span',{class:'n'}, String(i+1)), h('span',{}, L.title, h('br'), h('span',{class:'s'}, L.src)), h('span',{class:'st'}, (S.done[L.id]?'✦ зачтено':'') + (L.more ? ` · задачи ${solvedCount(L)}/${L.more.length}` : '')))))),
-    h('div',{class:'exam'},
-      h('div',{class:'lbl'},'До экзамена'),
-      h('div',{class:'big'}, days>0 ? `${days} ${plural(days,'день','дня','дней')}` : 'сегодня или уже прошёл'),
-      h('div',{}, days>0 ? `Осталось глав без штампа: ${left}${KEYS.length>1?' в обеих книгах':''}. Это примерно ${Math.ceil(left/weeks)} ${plural(Math.ceil(left/weeks),'глава','главы','глав')} в неделю, если оставить последнюю неделю на тренажёр.` : ''),
-      h('label',{for:'examDate'},'Дата экзамена:', dateIn),
-      h('div',{class:'row'}, U.btn('Начать с главы 1', ()=>go(B.key,1,1),'pri'), U.btn('Тренажёр: 10 вопросов', openQuiz))
-    ),
+    h('div',{class:'runhead'}, h('span',{},'Карта курса'), h('span',{}, `${doneCount(B.key)} из ${B.lessons.length} штампов`)),
+    ...B.parts.map((p,pi) => {
+      const Ls = B.lessons.filter(L=>L.partNo===pi), d = Ls.filter(L=>S.done[L.id]).length;
+      return h('div',{class:'partblk reveal',style:`animation-delay:${pi*60}ms`},
+        h('div',{class:'parthead'}, h('span',{class:'pr'}, ROMAN[pi]), h('span',{class:'pt'}, p.t), h('span',{class:'pc'}, `${d}/${Ls.length}`)),
+        h('div',{class:'pbar'}, h('i',{style:`width:${d/Ls.length*100}%`})),
+        h('ul',{class:'toclist'}, Ls.map(L => { const i = ++n; return h('li',{}, h('button',{type:'button',onclick:()=>go(B.key,i,1)},
+          h('span',{class:'n'}, String(i)), h('span',{}, L.title, h('br'), h('span',{class:'s'}, L.src)), chips(L))); })));
+    }),
+    planner(B),
     h('div',{class:'folio'},'ii')
   );
 }
 function plural(n,a,b,c){ n=Math.abs(n)%100; const d=n%10; if (n>10&&n<20) return c; if (d>1&&d<5) return b; if (d===1) return a; return c; }
 
+/* ——— планировщик подготовки ———
+   Оценка времени главы: чтение теории (~250 знаков в минуту для учебного текста), опыт, предсказание с разбором,
+   задача на штамп, по 6 минут на каждую дополнительную задачу и 5 минут на итоги и вопросы. */
+const plainLen = html => html.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').length;
+const estFull = L => Math.round(plainLen(L.theory + (L.flap||'') + (L.hook?L.hook.html:''))/250 + 12 + 6 + 8 + (L.more||[]).length*6 + (L.qs?5:0));
+const estLeft = L => S.done[L.id] ? ((L.more||[]).length - solvedCount(L))*6 : estFull(L) - solvedCount(L)*6;
+const hm = m => { m = Math.round(m); const hh = Math.floor(m/60), mm = m%60; return hh ? `${hh} ч${mm?' '+mm+' мин':''}` : `${mm} мин`; };
+const ddmm = d => d.toLocaleDateString('ru-RU',{weekday:'short',day:'2-digit',month:'2-digit'});
+const WEEK = {7:[0,1,2,3,4,5,6],6:[1,2,3,4,5,6],5:[1,2,3,4,5],4:[1,2,4,5],3:[1,3,5]};
+function planner(B){
+  const P = S.plan = S.plan || {}; const p = P[B.key] = Object.assign({exam:S.exam||'2026-12-25', mode:'min', minutes:60, chapters:1, days:6, review:3}, P[B.key]||{});
+  const box = h('div',{class:'exam planner'});
+  const ctl = (id, label, min, max, step, key, fmt) => U.slider(id, label, min, max, step, p[key], fmt, v => { p[key] = v; save(); calc(); });
+  const dateIn = h('input',{type:'date',class:'txt',id:'pl-exam-'+B.key,value:p.exam});
+  dateIn.addEventListener('change', () => { if (dateIn.value){ p.exam = dateIn.value; save(); calc(); } });
+  const bMin = U.btn('в минутах', ()=>{ p.mode='min'; save(); sync(); calc(); }), bCh = U.btn('в главах', ()=>{ p.mode='ch'; save(); sync(); calc(); });
+  const sMin = ctl('pl-min-'+B.key,'могу в день',15,300,15,'minutes',v=>hm(v));
+  const sCh = ctl('pl-ch-'+B.key,'глав в день',0.5,5,0.5,'chapters',v=>String(v).replace('.',','));
+  const sDays = ctl('pl-days-'+B.key,'дней в неделю',3,7,1,'days',v=>v);
+  const sRev = ctl('pl-rev-'+B.key,'дней на повторение',0,7,1,'review',v=>v);
+  const sync = () => { bMin.setAttribute('aria-pressed', p.mode==='min'); bCh.setAttribute('aria-pressed', p.mode==='ch'); sMin.hidden = p.mode!=='min'; sCh.hidden = p.mode!=='ch'; };
+  const out = h('div',{class:'pl-out'}), plan = h('div',{class:'pl-plan'});
+  box.append(h('div',{class:'lbl'},'План подготовки'),
+    h('label',{for:'pl-exam-'+B.key},'Дата экзамена:', dateIn),
+    h('div',{class:'row'}, h('span',{style:'color:var(--ink-soft);font-size:14px'},'Сколько могу учить:'), bMin, bCh),
+    h('div',{class:'ctls'}, sMin, sCh, sDays, sRev), out, plan);
+  sync();
+  function calc(){
+    const left = B.lessons.map((L,i)=>({L, i:i+1, m:estLeft(L)})).filter(x=>x.m>0);
+    const total = left.reduce((s,x)=>s+x.m,0), avg = B.lessons.reduce((s,L)=>s+estFull(L),0)/B.lessons.length;
+    const today = new Date(); today.setHours(0,0,0,0);
+    const exam = new Date(p.exam+'T00:00'), days = Math.round((exam - today)/864e5);
+    const studyEnd = new Date(exam); studyEnd.setDate(studyEnd.getDate() - p.review);
+    const wk = WEEK[p.days];
+    const dayList = []; for (const d = new Date(today); d < studyEnd; d.setDate(d.getDate()+1)) if (wk.includes(d.getDay())) dayList.push(new Date(d));
+    const cap = p.mode==='min' ? p.minutes : p.chapters*avg;
+    const need = Math.ceil(total / Math.max(1, cap));                       // учебных дней при твоём темпе
+    const minPerDay = dayList.length ? Math.ceil(total / dayList.length / 5)*5 : Infinity;
+    // дата окончания при твоём темпе (считая только учебные дни недели)
+    let fin = null; { let c = 0; for (const d = new Date(today); c < need && c < 2000; d.setDate(d.getDate()+1)) if (wk.includes(d.getDay())) { c++; fin = new Date(d); } }
+    const ok = !total || (fin && fin < studyEnd);
+    const spare = fin ? Math.round((studyEnd - fin)/864e5) - 1 : 0;
+    if (!total){ out.innerHTML = `<div class="pl-verdict ok">Все главы пройдены. До экзамена ${days} ${plural(days,'день','дня','дней')} — гоняй тренажёр и шпаргалку.</div>`; plan.replaceChildren(); return; }
+    out.innerHTML = `
+      <div class="pl-grid">
+        <div><span>Осталось</span><b>${hm(total)}</b><small>${left.length} ${plural(left.length,'глава','главы','глав')}, ≈ ${hm(avg)} на главу</small></div>
+        <div><span>До экзамена</span><b>${days>0?days+' '+plural(days,'день','дня','дней'):'—'}</b><small>учебных дней до повторения: ${dayList.length}</small></div>
+        <div><span>Твой темп</span><b>${hm(cap)} / день</b><small>займёт ${need} ${plural(need,'учебный день','учебных дня','учебных дней')} · это ${Math.max(1,Math.round(cap/25))} ${plural(Math.max(1,Math.round(cap/25)),'сессия','сессии','сессий')} по 25 мин</small></div>
+        <div><span>Нужно минимум</span><b>${isFinite(minPerDay)?hm(minPerDay)+' / день':'—'}</b><small>${isFinite(minPerDay)?'≈ '+(minPerDay/avg).toFixed(1).replace('.',',')+' главы в день':'дата экзамена уже прошла'}</small></div>
+      </div>
+      <div class="pl-verdict ${ok?'ok':'no'}">${days<=0 ? 'Поставь дату экзамена в будущем.' : ok
+        ? `Успеваешь: закончишь ${fin.toLocaleDateString('ru-RU',{day:'numeric',month:'long'})}${spare>0?`, запас ${spare} ${plural(spare,'день','дня','дней')}`:''}, затем ${p.review} ${plural(p.review,'день','дня','дней')} повторения.`
+        : `Не успеваешь: при таком темпе закончишь ${fin?fin.toLocaleDateString('ru-RU',{day:'numeric',month:'long'}):'слишком поздно'}. Занимайся хотя бы ${hm(minPerDay)} в день${p.days<7?' или добавь дни в неделю':''}.`}</div>`;
+    // раскладка глав по дням: главы целиком, длинная глава может перейти на следующий день
+    const rows = []; let q = left.map(x=>({...x})), di = 0;
+    const dayCap = ok ? cap : Math.max(cap, minPerDay);
+    while (q.length && di < dayList.length + 60){
+      const d = dayList[di] || (() => { const t = new Date(dayList[dayList.length-1]||today); t.setDate(t.getDate()+(di-dayList.length+1)); return t; })();
+      let room = dayCap, items = [];
+      while (q.length && room > 0){ const x = q[0], take = Math.min(x.m, room); const begun = x.m < estLeft(x.L); items.push(`гл. ${x.i}${take<x.m ? (begun?' (продолжить)':' (начать)') : (begun?' (закончить)':'')}`); x.m -= take; room -= take; if (x.m<=0) q.shift(); }
+      rows.push([d, items, dayCap-room]); di++;
+    }
+    const tbl = h('table',{}, h('tr',{}, h('th',{},'День'), h('th',{},'Что учить'), h('th',{},'Время')),
+      rows.map(([d,it,m],k)=>h('tr',{class:k>=8?'more-row':''}, h('td',{}, ddmm(d)), h('td',{}, it.join(', ')), h('td',{}, hm(m)))));
+    if (p.review) tbl.append(h('tr',{}, h('td',{}, '+'+p.review+' дн.'), h('td',{}, 'повторение: шпаргалка, вопросы к экзамену, тренажёр'), h('td',{}, '—')));
+    const showAll = rows.length > 8 ? U.btn(`Показать весь план (${rows.length} дней)`, ()=>{ tbl.classList.add('all'); showAll.remove(); }) : null;
+    plan.replaceChildren(h('div',{class:'tbl'}, tbl), showAll);
+  }
+  calc();
+  return box;
+}
+
 function renderLesson(B, i){
   const L = B.lessons[i-1];
-  // левая страница
+  const stepMode = !!S.ui.steps;
   const pred = S.pred[L.id];
   const flapBody = h('div',{class:'flapbody',hidden:true});
   const flapBtn = h('button',{class:'flapbtn',type:'button','aria-expanded':'false'},
@@ -1384,47 +2140,92 @@ function renderLesson(B, i){
   };
   flapBtn.addEventListener('click', openFlap);
   mark();
-  pL.replaceChildren(
-    h('div',{class:'runhead'}, h('span',{}, `${B.name} · глава ${i}`), h('span',{}, L.src)),
-    h('h2',{}, h('span',{class:'no'}, i+'.'), L.title),
-    L.hook ? h('aside',{class:'hook'}, h('div',{class:'hk-eye'}, L.hook.eye), h('h3',{}, L.hook.title), h('div',{html:L.hook.html})) : null,
-    h('div',{class:'theory',html:L.theory}),
-    h('div',{class:'predict'}, h('div',{class:'lbl'},'Предскажи'), h('p',{html:L.predict.q}), opts),
-    flapBtn, flapBody,
-    h('div',{class:'folio'}, String(i*2))
-  );
-  if (pred!=null) openFlap(true);
 
-  // правая страница
+  // смысловые блоки главы
+  const hookEl = L.hook ? h('aside',{class:'hook reveal',style:'animation-delay:80ms'}, h('div',{class:'hk-eye'}, L.hook.eye), h('h3',{}, L.hook.title), h('div',{html:L.hook.html})) : null;
+  const chunks = L.theory.split(/(?=<h3>)/).map(s=>s.trim()).filter(Boolean);
+  const theoryEls = chunks.map(c=>h('div',{class:'theory',html:c}));
+  const predictEl = h('div',{class:'predict'}, h('div',{class:'lbl'},'Предскажи'), h('p',{html:L.predict.q}), opts);
+  const sumEl = L.sum ? h('div',{class:'sum'}, h('div',{class:'lbl'},'Итоги главы'), h('ul',{}, L.sum.map(s=>h('li',{html:s})))) : null;
+  const qsEl = L.qs ? h('div',{class:'examq'}, h('div',{class:'lbl'},'Вопросы к экзамену'),
+    L.qs.map(([q,a])=>h('details',{}, h('summary',{html:q}), h('div',{class:'ans',html:a})))) : null;
+
   const fig = h('div',{class:'fig'});
   const input = h('input',{class:'txt',id:'ans-'+L.id,autocomplete:'off',placeholder:L.ch.ph||'ответ','aria-label':'Ответ'});
   const fb = h('p',{class:'fb',role:'status'});
   const slot = h('div',{class:'stampslot'});
-  if (S.done[L.id]){ slot.innerHTML = stampSVG(i); fb.className='fb ok'; fb.textContent = 'Зачтено. Ответ: '+L.ch.ans; }
+  if (S.done[L.id]){ slot.innerHTML = stampSVG(i); fb.className='fb ok'; fb.innerHTML = 'Зачтено. Ответ: '+L.ch.ans; }
   const form = h('form',{}, input, h('button',{class:'btn pri',type:'submit'},'Проверить'));
   form.addEventListener('submit', e => {
     e.preventDefault();
     if (!input.value.trim()){ fb.className='fb no'; fb.textContent='Впиши ответ в поле.'; return; }
     if (L.ch.check(input.value)){
-      fb.className='fb ok'; fb.textContent = 'Верно! Ответ: '+L.ch.ans+'.';
+      fb.className='fb ok'; fb.innerHTML = 'Верно! Ответ: '+L.ch.ans+'.';
       if (!S.done[L.id]){ gain('и штамп главы '+i, ()=>{ S.done[L.id]=true; }); slot.innerHTML = stampSVG(i,true); }
     } else { fb.className='fb no'; fb.textContent = L.ch.wrong || 'Пока не сходится. Проверь вычисления или открой подсказку.'; }
   });
-  pR.replaceChildren(
-    h('div',{class:'runhead'}, h('span',{},'Опыт'), h('span',{}, 'рис. '+i)),
-    fig,
-    h('p',{class:'cap',html:`<b>РИС. ${i}.</b> ${L.figCap}`}),
-    h('p',{class:'try',html:'✎ '+L.try}),
-    h('div',{class:'challenge'}, slot, h('div',{class:'lbl'},'Задача на штамп'), h('p',{html:L.ch.q}), form, fb,
-      L.ch.hint ? h('details',{class:'hint'}, h('summary',{},'подсказка'), h('div',{html:L.ch.hint})) : null),
-    L.more ? renderMore(L) : null,
-    h('div',{class:'folio'}, String(i*2+1))
+  const capEl = h('p',{class:'cap',html:`<b>РИС. ${i}.</b> ${L.figCap}`}), tryEl = h('p',{class:'try',html:'✎ '+L.try});
+  const chEl = h('div',{class:'challenge'}, slot, h('div',{class:'lbl'},'Задача на штамп'), h('p',{html:L.ch.q}), form, fb,
+    L.ch.hint ? h('details',{class:'hint'}, h('summary',{},'подсказка'), h('div',{html:L.ch.hint})) : null);
+  const moreEl = L.more ? renderMore(L) : null;
+
+  // шаги главы: по одному смысловому куску за раз
+  const steps = [];
+  if (hookEl) steps.push({t:'История', sub:L.hook.title, min:2, els:[hookEl]});
+  theoryEls.forEach((el,k)=>{ const t3 = el.querySelector('h3');
+    steps.push({t: theoryEls.length>1 ? `Теория ${k+1}/${theoryEls.length}` : 'Теория', sub: t3 ? t3.textContent.replace('§','').trim() : 'главное', min: Math.max(1, Math.round(plainLen(el.innerHTML)/250)+1), els:[el]}); });
+  steps.push({t:'Предскажи', sub:'ответь до проверки', min:2, els:[predictEl, flapBtn, flapBody]});
+  steps.push({t:'Опыт', sub:'интерактивный рисунок', min:8, els:[fig, capEl, tryEl], right:true});
+  steps.push({t:'Задачи', sub:'штамп и доп. задачи', min:8+(L.more||[]).length*6, els:[chEl, moreEl].filter(Boolean), right:true});
+  if (sumEl || qsEl) steps.push({t:'Итоги', sub:'итоги и вопросы к экзамену', min:5, els:[sumEl, qsEl].filter(Boolean)});
+
+  const leftEls = steps.filter(s=>!s.right).flatMap(s=>s.els), rightEls = steps.filter(s=>s.right).flatMap(s=>s.els);
+  const stepBar = stepMode ? h('div',{class:'stepbar',role:'tablist','aria-label':'Шаги главы'}) : null;
+  const stepHead = stepMode ? h('div',{class:'stephead'}) : null;
+  const stepNav = stepMode ? h('div',{class:'stepnav'}) : null;
+  pL.replaceChildren(
+    h('div',{class:'runhead'}, h('span',{}, `${B.name} · часть ${ROMAN[L.partNo]}`), h('span',{}, L.src)),
+    h('div',{class:'opener reveal'}, h('span',{class:'bignum','aria-hidden':'true'}, String(i)),
+      h('div',{class:'part-lbl'}, `Глава ${i} · ${L.part}`), h('h2',{}, L.title)),
+    stepBar, stepHead, ...leftEls,
+    h('div',{class:'folio'}, String(i*2))
   );
+  pR.replaceChildren(h('div',{class:'runhead'}, h('span',{},'Опыт'), h('span',{}, 'рис. '+i)), ...rightEls, h('div',{class:'folio'}, String(i*2+1)));
+  if (pred!=null) openFlap(true);
   draw = L.fig(fig) || null;
-  if (draw) requestAnimationFrame(()=>draw());
+
+  if (!stepMode){ pR.hidden = false; if (draw) requestAnimationFrame(()=>draw()); return; }
+
+  // пошаговый режим
+  S.step = S.step || {}; S.seen = S.seen || {};
+  const total = steps.reduce((s,x)=>s+x.min,0);
+  let cur = Math.min(S.step[L.id]||0, steps.length-1);
+  const show = (k, scroll) => {
+    cur = k; S.step[L.id] = k; S.seen[L.id] = Math.max(S.seen[L.id]||0, k); save();
+    steps.forEach((s,j)=>s.els.forEach(el=>{ el.hidden = j!==k; }));
+    if (!flapBody.childElementCount || flapBtn.getAttribute('aria-expanded')!=='true') flapBody.hidden = true;
+    const st = steps[k], left = steps.slice(k).reduce((s,x)=>s+x.min,0);
+    pR.hidden = !st.right;
+    stepBar.replaceChildren(...steps.map((s,j)=>h('button',{type:'button',role:'tab','aria-selected':j===k,class:'sp'+(j===k?' cur':j<=(S.seen[L.id]||0)?' done':''),onclick:()=>show(j,true)},
+      h('b',{}, j<k||(j<=(S.seen[L.id]||0)&&j!==k) ? '✓' : String(j+1)), ' '+s.t)));
+    stepHead.innerHTML = `<span>Шаг ${k+1} из ${steps.length} · ≈ ${st.min} мин</span><b>${st.t}${st.sub?': '+st.sub:''}</b><i style="width:${(k+1)/steps.length*100}%"></i><small>до конца главы ≈ ${left} мин из ${total}</small>`;
+    const last = k === steps.length-1, nextCh = i < B.lessons.length;
+    const speak = ('speechSynthesis' in window) ? U.btn('🔊 Слушать', ()=>{
+      try { if (speechSynthesis.speaking){ speechSynthesis.cancel(); return; }
+        const u = new SpeechSynthesisUtterance(st.els.map(e=>e.innerText).join('. ').replace(/\s+/g,' ').slice(0,4000)); u.lang = 'ru-RU'; u.rate = 1; speechSynthesis.speak(u); } catch(e){} }) : null;
+    stepNav.replaceChildren(
+      U.btn('← Назад', ()=> k ? show(k-1,true) : (i>1 ? go(B.key,i-1,-1) : go(B.key,0,-1)), 'big'),
+      h('span',{class:'sn-mid'}, speak),
+      U.btn(last ? (nextCh ? 'Следующая глава →' : 'К обложке →') : 'Дальше →', ()=> !last ? show(k+1,true) : go(B.key, nextCh ? i+1 : 0, 1), 'pri big'));
+    (st.right ? pR : pL).insertBefore(stepNav, (st.right ? pR : pL).querySelector('.folio'));
+    if (st.right && draw) requestAnimationFrame(()=>draw());
+    if (scroll){ try { speechSynthesis && speechSynthesis.cancel(); } catch(e){} stepBar.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'}); }
+    stepBar.querySelector('.cur')?.scrollIntoView({block:'nearest', inline:'center'});
+  };
+  stepNavApi = { next: ()=> cur < steps.length-1 ? (show(cur+1,true), true) : false, prev: ()=> cur > 0 ? (show(cur-1,true), true) : false };
+  show(cur, false);
 }
 
-const solvedCount = L => (L.more||[]).filter((_,j)=>S.solved[L.id+'-'+j]).length;
 function renderMore(L){
   return h('div',{class:'more'}, h('div',{class:'lbl'}, BOOKS[S.book].moreTitle), L.more.map((P,j)=>{
     const key = L.id+'-'+j;
@@ -1446,11 +2247,13 @@ function renderMore(L){
 
 function render(){
   const B = BOOKS[S.book];
-  document.getElementById('book').dataset.book = S.book;
+  const bookEl = document.getElementById('book');
+  bookEl.dataset.book = S.book;
+  bookEl.classList.toggle('stepmode', !!S.ui.steps && S.i>0);
   for (const k of KEYS){ const e = document.getElementById('sp-'+k); if (e) e.setAttribute('aria-pressed', k===S.book); }
   if (S.i===0) renderCover(B); else renderLesson(B, S.i);
   const L = B.lessons[S.i-1];
-  document.getElementById('bTitle').innerHTML = S.i ? `<small>${S.i}</small>${L.title}` : `<small>${B.name}</small>Обложка и оглавление`;
+  document.getElementById('bTitle').innerHTML = S.i ? `<small>${S.i}/${B.lessons.length}</small>${L.title}` : `<small>${B.name}</small>Обложка и карта курса`;
   document.getElementById('bPrev').disabled = S.i===0;
   document.getElementById('bNext').disabled = S.i>=B.lessons.length;
   updCounts();
@@ -1460,10 +2263,9 @@ function render(){
 let busy = false;
 function go(book, i, dir){
   if (busy) return;
-  const same = book===S.book && i===S.i;
-  if (same) return;
+  if (book===S.book && i===S.i) return;
   closeToc();
-  const animate = !matchMedia('(prefers-reduced-motion: reduce)').matches && innerWidth>900;
+  const animate = !matchMedia('(prefers-reduced-motion: reduce)').matches && innerWidth>900 && !S.ui.steps && !S.ui.calm;
   S.book = book; S.i = i; save();
   if (!animate){ render(); window.scrollTo({top:0}); return; }
   busy = true;
@@ -1476,17 +2278,41 @@ function go(book, i, dir){
 const toc = document.getElementById('toc'), tocPanel = document.getElementById('tocPanel');
 function openToc(){
   tocPanel.replaceChildren(U.btn('Закрыть', closeToc, 'close'), h('h3',{style:'margin-top:0'},'Оглавление'),
-    ...KEYS.map(k => h('div',{},
-      h('h3',{}, BOOKS[k].name+' — '+BOOKS[k].sub),
-      h('ul',{class:'toclist'},
-        h('li',{}, h('button',{type:'button',onclick:()=>go(k,0,-1)}, h('span',{class:'n'},'·'), h('span',{},'Обложка, план, тренажёр'), h('span',{}))),
-        BOOKS[k].lessons.map((L,i)=>h('li',{}, h('button',{type:'button',onclick:()=>go(k,i+1,1)}, h('span',{class:'n'},String(i+1)), h('span',{},L.title), h('span',{class:'st'}, S.done[L.id]?'✦':''))))))));
+    ...KEYS.map(k => { const B = BOOKS[k]; let n = 0; return h('div',{},
+      h('h3',{}, B.name+' — '+B.sub),
+      h('ul',{class:'toclist'}, h('li',{}, h('button',{type:'button',onclick:()=>go(k,0,-1)}, h('span',{class:'n'},'·'), h('span',{},'Обложка и карта курса'), h('span',{})))),
+      ...B.parts.map((p,pi)=>h('div',{}, h('div',{class:'part-lbl',style:'margin:12px 0 2px'}, `Часть ${ROMAN[pi]} · ${p.t}`),
+        h('ul',{class:'toclist'}, B.lessons.filter(L=>L.partNo===pi).map(L=>{ const i = ++n; return h('li',{}, h('button',{type:'button',onclick:()=>go(k,i,1)}, h('span',{class:'n'},String(i)), h('span',{},L.title), chips(L))); }))))); }));
   toc.hidden = false; tocPanel.querySelector('button').focus();
 }
 function closeToc(){ toc.hidden = true; }
 toc.addEventListener('click', e => { if (e.target===toc) closeToc(); });
 
-/* тренажёр: случайные вопросы «предскажи» из обеих книг */
+/* шпаргалка: все формулы и итоги глав текущей книги */
+const sheet = document.getElementById('sheet'), sheetIn = document.getElementById('sheetIn');
+function openSheet(){
+  const B = BOOKS[S.book];
+  const search = h('input',{class:'txt',id:'sheetQ',type:'search',placeholder:'поиск по шпаргалке','aria-label':'Поиск по шпаргалке',style:'width:min(280px,100%)'});
+  const cols = h('div',{class:'cols'});
+  let n = 0;
+  B.parts.forEach((p,pi)=>{
+    cols.append(h('div',{class:'ph'}, `Часть ${ROMAN[pi]} · ${p.t}`));
+    B.lessons.filter(L=>L.partNo===pi).forEach(L=>{
+      const i = ++n, tmp = document.createElement('div'); tmp.innerHTML = L.theory;
+      const it = h('div',{class:'item'}, h('h3',{}, h('span',{}, i+'.'), ' '+L.title));
+      tmp.querySelectorAll('.f').forEach(f=>it.append(f));
+      if (L.sum) it.append(h('ul',{}, L.sum.map(s=>h('li',{html:s}))));
+      it.append(U.btn('Открыть главу', ()=>{ sheet.hidden = true; go(S.book, i, 1); }));
+      cols.append(it);
+    });
+  });
+  search.addEventListener('input', () => { const q = search.value.trim().toLowerCase();
+    cols.querySelectorAll('.item').forEach(it => it.hidden = q && !it.textContent.toLowerCase().includes(q)); });
+  sheetIn.replaceChildren(h('header',{}, h('h2',{}, `Шпаргалка · ${B.name}`), h('div',{class:'row'}, search, U.btn('Закрыть', ()=>sheet.hidden=true,'pri'))), cols);
+  sheet.hidden = false; sheet.scrollTop = 0; search.focus();
+}
+
+/* тренажёр: случайные вопросы «предскажи» и вопросы к экзамену */
 const quiz = document.getElementById('quiz'), card = document.getElementById('quizCard');
 let Q = null;
 function openQuiz(){
@@ -1498,7 +2324,7 @@ function openQuiz(){
 function showQ(){
   if (Q.n>=Q.items.length){
     card.replaceChildren(h('div',{class:'meta'},'Итог'), h('h2',{}, `${Q.score} из ${Q.items.length}`),
-      h('p',{}, Q.score>=8 ? 'Отлично, так держать до экзамена.' : 'Вернись к главам, где ошибся: разбор под клапаном.'),
+      h('p',{}, Q.score>=8 ? 'Отлично, так держать до экзамена.' : 'Вернись к главам, где ошибся: разбор под клапаном, итоги — в конце главы.'),
       h('div',{class:'row'}, U.btn('Ещё 10', openQuiz,'pri'), U.btn('Закрыть', ()=>quiz.hidden=true)));
     card.querySelector('button').focus(); return;
   }
@@ -1525,11 +2351,47 @@ function showQ(){
 }
 quiz.addEventListener('click', e => { if (e.target===quiz) quiz.hidden=true; });
 document.addEventListener('keydown', e => {
-  if (e.key==='Escape'){ closeToc(); quiz.hidden = true; }
-  if (e.target.matches('input,select,textarea') || !toc.hidden || !quiz.hidden) return;
-  if (e.key==='ArrowRight' && S.i<BOOKS[S.book].lessons.length) go(S.book,S.i+1,1);
-  if (e.key==='ArrowLeft' && S.i>0) go(S.book,S.i-1,-1);
+  if (e.key==='Escape'){ closeToc(); quiz.hidden = true; sheet.hidden = true; focusDlg.hidden = true; }
+  if (e.target.matches('input,select,textarea') || !toc.hidden || !quiz.hidden || !sheet.hidden || !focusDlg.hidden) return;
+  if (e.key==='ArrowRight'){ if (stepNavApi && stepNavApi.next()) return; if (S.i<BOOKS[S.book].lessons.length) go(S.book,S.i+1,1); }
+  if (e.key==='ArrowLeft'){ if (stepNavApi && stepNavApi.prev()) return; if (S.i>0) go(S.book,S.i-1,-1); }
 });
+
+/* режим концентрации: настройки и таймер фокуса */
+const focusDlg = document.getElementById('focus'), focusCard = document.getElementById('focusCard'), chip = document.getElementById('timerChip');
+const T = {mode:null, end:0, iv:0};
+const BREAK = {10:2, 15:3, 25:5, 45:10};
+function beep(){ try { const c = new (window.AudioContext||window.webkitAudioContext)(); [0,.25].forEach(t=>{ const o = c.createOscillator(), g = c.createGain(); o.frequency.value = 660; g.gain.value = .05; o.connect(g).connect(c.destination); o.start(c.currentTime+t); o.stop(c.currentTime+t+.15); }); } catch(e){} }
+function timerStart(mode, min){
+  clearInterval(T.iv); T.mode = mode; T.end = Date.now() + min*60000;
+  const tick = () => { const s = Math.max(0, Math.round((T.end-Date.now())/1000));
+    chip.hidden = false; chip.className = 'timerchip '+mode;
+    chip.innerHTML = `<b>${mode==='focus'?'Фокус':'Перерыв'}</b> ${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')} <button type="button" aria-label="Остановить таймер">✕</button>`;
+    chip.querySelector('button').onclick = timerStop;
+    if (!s){ clearInterval(T.iv); beep();
+      if (mode==='focus'){ toast(`<b>Сессия окончена!</b> Перерыв ${BREAK[S.ui.timer]||5} мин: встань, попей воды, не открывай ленту.`, 'rankup'); timerStart('break', BREAK[S.ui.timer]||5); }
+      else { toast('<b>Перерыв окончен.</b> Готов к следующей сессии? Нажми таймер ещё раз.'); timerStop(); } } };
+  tick(); T.iv = setInterval(tick, 1000);
+}
+function timerStop(){ clearInterval(T.iv); T.mode = null; chip.hidden = true; }
+function openFocus(){
+  const row = (key, title, desc) => { const id = 'ui-'+key, cb = h('input',{type:'checkbox',id,checked:!!S.ui[key]});
+    cb.addEventListener('change', ()=>{ S.ui[key] = cb.checked; save(); applyUI(); render(); });
+    return h('label',{class:'fopt',for:id}, cb, h('span',{}, h('b',{},title), h('small',{},desc))); };
+  focusCard.replaceChildren(
+    h('div',{class:'meta'},'Настройки для концентрации'), h('h2',{style:'margin:4px 0 12px'},'Режим фокуса'),
+    row('steps','Пошаговый режим','Глава разбита на короткие шаги: на экране один кусок и кнопка «Дальше». Стрелки ← → листают шаги.'),
+    row('calm','Спокойное оформление','Без текстур, наклонов, анимаций и декоративных цифр — меньше отвлекает.'),
+    row('big','Крупный текст','Шрифт больше, строки свободнее.'),
+    row('ruler','Линейка чтения','Абзац под курсором остаётся ярким, остальной текст приглушается.'),
+    h('h3',{},'Таймер фокуса'),
+    h('p',{style:'margin:0 0 8px;color:var(--ink-soft);font-size:14px'},'Короткие сессии с перерывами держат внимание лучше, чем час подряд. После сессии таймер сам предложит перерыв.'),
+    h('div',{class:'row'}, ...[10,15,25,45].map(m=>{ const b = U.btn(m+' мин', ()=>{ S.ui.timer = m; save(); timerStart('focus', m); focusDlg.hidden = true; }, S.ui.timer===m?'pri':''); return b; }),
+      T.mode ? U.btn('Остановить', ()=>{ timerStop(); openFocus(); }) : null),
+    h('div',{class:'row',style:'margin-top:16px;justify-content:flex-end'}, U.btn('Готово', ()=>focusDlg.hidden=true,'pri')));
+  focusDlg.hidden = false; focusCard.querySelector('input').focus();
+}
+focusDlg.addEventListener('click', e => { if (e.target===focusDlg) focusDlg.hidden = true; });
 
 /* тема */
 function applyTheme(){ if (S.theme) document.documentElement.dataset.theme = S.theme; else delete document.documentElement.dataset.theme; draw && draw(); }
@@ -1542,6 +2404,8 @@ applyTheme();
 
 document.getElementById('bMenu').onclick = openToc;
 document.getElementById('bQuiz').onclick = openQuiz;
+document.getElementById('bSheet').onclick = openSheet;
+document.getElementById('bFocus').onclick = () => T.mode ? openFocus() : openFocus();
 document.getElementById('bPrev').onclick = () => go(S.book, S.i-1, -1);
 document.getElementById('bNext').onclick = () => go(S.book, S.i+1, 1);
 if (KEYS.length > 1) document.getElementById('spines').append(...KEYS.map(k =>
@@ -1554,6 +2418,7 @@ new ResizeObserver(()=>{ cancelAnimationFrame(raf); raf = requestAnimationFrame(
 document.fonts && document.fonts.ready.then(()=>draw && draw());
 render();
 })();
+
 </script>
 
 </body>
